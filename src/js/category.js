@@ -59,7 +59,6 @@ const getCategory = async () => {
         url: 'http://localhost:3000/categories'
     }).then(res => res.data)
         .then(data => {
-            console.log(data)
             let findCategoryName = data.find(category => {
                 return Number(category.id) === categoryIDParams;
             })
@@ -70,7 +69,6 @@ const getCategory = async () => {
                 descriptionHistoryProductText.innerHTML = findCategoryName.categorieHistoryDescription
                 descriptionProductText.innerHTML = findCategoryName.categoryDescription
                 findCategoryName.images.forEach(image => {
-                  
                     slideWrappBanner.insertAdjacentHTML('beforeend', `
                          <div class="swiper-slide">
                             <div class="image-gategory overflow-hidden">
@@ -80,7 +78,6 @@ const getCategory = async () => {
                         `)
                 })
             }
-
         });
 }
 getCategory()
@@ -104,9 +101,9 @@ const displayProductsList = (allProducts, productsContainer) => {
     let fragment = document.createDocumentFragment();
 
     allProducts.forEach(product => {
-
         let slide = document.createElement('div');
         slide.className = 'swiper-slide';
+        
         slide.innerHTML = `
             <div class="swiper-slide">
               <div class="product-category d-flex flex-col gap-16">
