@@ -2,7 +2,7 @@
   "name": "copper-dishes-page",
   "version": "1.0.0",
   "description": "The practice project is the same as the Naqshnegar copperware sales site",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.20.2",
-    "json-server": "^1.0.0-beta.2"
+    "json-server": "^0.17.0"
   }
 }
