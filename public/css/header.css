@@ -1,0 +1,177 @@
+@import url(custom.css);
+
+/* ! ---------------------------------- header ---------------------------------- ! */
+.header {
+    padding: 15px;
+}
+
+/* ! ---------------------------------- navbar desctop---------------------------------- ! */
+.navbar {
+    background-color: var(--main-color);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.navbar-manu {
+    display: flex;
+    padding-right: 70px;
+    gap: 54px;
+}
+
+.navbar-manu .navbar-manu-item .navbar-manu-item-link {
+    color: var(--white-color);
+    font-size: 18px;
+    padding: 5px;
+}
+
+.navbar-manu .navbar-manu-item .navbar-manu-item-link:hover {
+    border-bottom: 1px solid var(--gray-color6);
+}
+
+.navbar-buttons svg {
+    color: var(--white-color);
+}
+
+.navbar-manu-item .navbar-submenu {
+    background-color: var(--white-color);
+    padding: 10px 5px;
+    top: 50px;
+    right: 50%;
+    transform: translateX(50%);
+    z-index: 9999;
+    border-radius: 5px;
+    width: 180px;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.navbar-manu-item:hover .navbar-submenu,
+.navbar-manu-item .navbar-submenu:hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-submenu .navbar-submenu-item {
+    padding: 0 20px;
+}
+
+.navbar-submenu .navbar-submenu-item:hover {
+    background-color: var(--gray-color1);
+    border-radius: 4px;
+}
+
+/* ! ---------------------------------- navbar mobile---------------------------------- ! */
+.navbar-mobile {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 290px;
+    background-color: var(--white-color);
+    top: 0;
+    z-index: 99;
+    transition: var(--trans);
+}
+
+.navbar-submenu-item .navbar-submenu-item-link {
+    padding: 10px 0;
+    color: var(--dark-color1);
+}
+
+.navbar-submenu.disable {
+    opacity: 0;
+    height: 0;
+}
+
+.navbar-active {
+    transform: translateX(0);
+}
+
+.navbar-hidden {
+    transform: translateX(400px);
+    opacity: 0;
+    visibility: 0;
+}
+
+.navbar .navbar-btn,
+.navbar-mobile .navbar-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: var(--gold-color4);
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.navbar .navbar-btn .navbar-btn-link,
+.navbar-mobile .navbar-btn .navbar-mobile-btn-link {
+    color: var(--white-color) !important;
+}
+
+.navbar .navbar-btn:hover,
+.navbar-mobile .navbar-btn:hover {
+    background-color: var(--gold-hover1);
+}
+
+.navbar-mobile-manu .navbar-mobile-manu-item {
+    padding-bottom: 30px;
+}
+
+.navbar-mobile-manu-item .category-btn {
+    background-color: var(--gold-color4);
+    color: var(--white-color);
+    padding: 10px 0;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.navbar-mobile-manu-item .category-btn:hover {
+    background-color: var(--gold-hover1);
+}
+
+.navbar-mobile-manu .navbar-mobile-manu-item .navbar-mobile-manu-item-link {
+    color: var(--dark-color1);
+}
+
+.navbar-mobile-manu-item .navbar-close {
+    font-size: 32px;
+    color: var(--dark-color1);
+}
+
+.navbar-mobile-manu .navbar-mobile-manu-item:not(:last-child) .navbar-mobile-manu-item-link:hover,
+.navbar-mobile-manu-item .navbar-close:hover {
+    background-color: var(--gray-color6);
+}
+
+.manu-bar-btn {
+    padding: 0 30px;
+    background-color: transparent;
+}
+
+/* ! ---------------------------------- media query ---------------------------------- ! */
+/* ! ---------------------------------- Small ---------------------------------- ! */
+@media (max-width:767.98px) {
+    .navbar {
+        display: none;
+    }
+}
+
+/* ! ---------------------------------- Medium ---------------------------------- ! */
+@media (max-width:991.98px) {
+    .navbar-manu {
+        gap: 25px
+    }
+
+    .navbar-manu .navbar-manu-item .navbar-manu-item-link {
+        padding: 0;
+        font-size: 18px;
+    }
+}
+
+/* ! ---------------------------------- Large ---------------------------------- ! */
+@media (max-width:1199.98px) {
+    .navbar-manu {
+        padding: 0;
+    }
+}
+
+/* ! ---------------------------------- X Large ---------------------------------- ! */
+@media (max-width:1299.98px) {}

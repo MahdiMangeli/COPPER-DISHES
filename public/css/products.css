@@ -1,0 +1,123 @@
+@import url(custom.css);
+
+body {
+    position: relative;
+}
+
+/* ! ---------------------------------- banner ---------------------------------- ! */
+.header .banner {
+    margin-top: 80px;
+}
+
+.banner .swiper-slide {
+    border-radius: 8px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    border: 2px solid var(--main-color);
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+}
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+    content: 'prev';
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+    content: 'next';
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+/* ! ---------------------------------- main ---------------------------------- ! */
+.main {
+    margin-top: 45px;
+}
+
+/* ! ---------------------------------- filter product ---------------------------------- ! */
+.filter-products {
+    margin-bottom: 35px;
+}
+
+.filter-products span {
+    position: relative;
+    padding: 5px;
+    transition: all 0.1s ease;
+}
+
+.filter-products span:hover,
+.filter-products .active {
+    color: var(--brown-color2);
+}
+
+.filter-products span:hover::after,
+.filter-products .active::after {
+    position: absolute;
+    content: '';
+    height: 2px;
+    width: 100%;
+    background-color: var(--brown-color2);
+    right: 0;
+    bottom: -5px;
+}
+
+/* ! ----------------------------------  products ---------------------------------- ! */
+.product {
+    border: var(--gray-border);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 10px;
+}
+
+.product-infos .product-title {
+    font-size: 18px;
+}
+
+.btn-more-info {
+    background-color: transparent;
+    border-radius: 16px;
+    border: 1px solid var(--dark-color1);
+    padding: 10px 0;
+    text-align: center;
+    color: var(--dark-color1);
+    transition: var(--trans);
+}
+
+.swiper-slide {
+    margin-top: 0 !important;
+}
+
+/* ! ---------------------------------- product pagingation ---------------------------------- ! */
+
+.swiper-pagination {
+    margin: 48px 0;
+    inset: unset !important;
+}
+
+.swiper-pagination-bullet {
+    width: 30px;
+    height: 30px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-color1);
+    font-size: 13px;
+    box-shadow: var(--shadow);
+    transition: var(--trans);
+    opacity: 1;
+    background-color: transparent;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--main-color);
+    color: var(--white-color);
+}

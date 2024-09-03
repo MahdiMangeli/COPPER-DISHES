@@ -1,0 +1,105 @@
+.swiper-slide-category {
+    padding: 112px 0 36px 0;
+    margin-bottom: 36px;
+}
+
+.image-gategory {
+    border-radius: 8px;
+}
+
+.description-title,
+.description-product-text,
+.description-history-product-text {
+    line-height: 30px;
+}
+
+.description-title,
+.discription-history-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 16px 0;
+}
+
+.description-product-text,
+.description-history-product-text {
+    color: var(--dark-color2);
+}
+
+.description-product-content {
+    margin-bottom: 36px;
+}
+
+.products-category {
+    padding: 36px;
+    border-radius: 12px;
+    border: 1px solid var(--gold-color4);
+    margin-bottom: 36px;
+}
+
+.products-category-title {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 28px;
+}
+
+/* ! ----------------------------------  products ---------------------------------- ! */
+.product-category {
+    border: var(--gray-border);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 10px;
+}
+
+.product-infos .product-title {
+    font-size: 18px;
+}
+
+.btn-more-info {
+    background-color: transparent;
+    border-radius: 16px;
+    border: 1px solid var(--dark-color1);
+    padding: 10px 0;
+    text-align: center;
+    color: var(--dark-color1);
+    transition: var(--trans);
+}
+
+.swiper-slide {
+    margin-top: 0 !important;
+}
+
+/* ! ---------------------------------- product pagingation ---------------------------------- ! */
+.swiper-pagination {
+    margin: 48px 0;
+    inset: unset !important;
+}
+
+.swiper-pagination-bullet {
+    width: 30px;
+    height: 30px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-color1);
+    font-size: 13px;
+    box-shadow: var(--shadow);
+    transition: var(--trans);
+    opacity: 1;
+    background-color: transparent;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--main-color);
+    color: var(--white-color);
+}
+
+/* ! ---------------------------------- media query ---------------------------------- ! */
+/* ! ---------------------------------- X Small ---------------------------------- ! */
+@media (max-width:575.98px) {
+    .products-category {
+        padding: 10px;
+    }
+}
+
+@media (max-width:767.98px) {}

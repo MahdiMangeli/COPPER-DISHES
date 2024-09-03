@@ -1,0 +1,520 @@
+@import url(custom.css);
+
+.main .container {
+    max-width: 1392px;
+}
+
+/* ! ---------------------------------- header---------------------------------- ! */
+.header {
+    padding: 0;
+    margin-bottom: 100px;
+}
+
+/* ! ---------------------------------- title---------------------------------- ! */
+.index-title {
+    color: var(--gold-color3);
+    font-size: 48px;
+}
+
+/* ! ---------------------------------- banner-right ---------------------------------- ! */
+
+.logo .img-logo {
+    width: 160px;
+    height: 135px;
+}
+
+.banner-text {
+    margin-top: 80px;
+    padding: 30px;
+}
+
+.banner-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.banner-title span {
+    color: var(--gold-color1);
+}
+
+.banner-desc {
+    line-height: 25px;
+    font-size: 16px;
+}
+
+.banner-right .banner-image-circle img {
+    width: 350px;
+    top: 111px;
+    right: 239px;
+    z-index: -1;
+}
+
+/* ! ---------------------------------- banner-left ---------------------------------- ! */
+.banner-left {
+    padding: 12px 14px;
+    background-color: var(--gold-color2);
+}
+
+.banner-image-circle img {
+    width: 200px;
+    top: 108px;
+    left: 0;
+}
+
+.banner-copper-image {
+    width: 600px;
+}
+
+.phone-number {
+    color: var(--white-color);
+    left: 188px;
+    bottom: 145px;
+}
+
+.banner-sotial {
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    background-color: var(--white-color);
+    width: 400px;
+    height: 130px;
+}
+
+.banner-sotial .sotial-icon svg {
+    color: var(--main-color);
+}
+
+/* ! ---------------------------------- main ---------------------------------- ! */
+/* ! ---------------------------------- popular header ---------------------------------- ! */
+.product-popular-header {
+    margin-bottom: 40px;
+}
+
+.popular-text,
+.popular-view-more-btn {
+    white-space: nowrap;
+}
+
+.popular-line {
+    height: 1px;
+    width: 70%;
+    background-color: var(--gray-color4);
+}
+
+.popular-view-more-btn {
+    background-color: var(--main-color);
+    color: var(--white-color);
+    padding: 13px 16px;
+    border-radius: 15px 0 0 0;
+    border: 1px solid var(--main-color);
+    transition: var(--trans);
+}
+
+.popular-view-more-btn:hover {
+    background-color: var(--white-color);
+    color: var(--main-color);
+}
+
+/* ! ---------------------------------- popular product list ---------------------------------- ! */
+.product-popular-list {
+    background-color: var(--gold-color2);
+    border-radius: 400px 0 400px 0;
+    padding: 60px
+}
+
+.bg-circle-product-popluar .img-circle {
+    width: 320px;
+    height: 320px;
+    z-index: 1;
+}
+
+.bg-circle-product-popluar .img-circle-top {
+    top: 0;
+    right: 0;
+}
+
+.bg-circle-product-popluar .img-circle-bottom {
+    bottom: 0;
+    left: 0;
+}
+
+/* ! ---------------------------------- popular product slider ---------------------------------- ! */
+
+.popular-product-slide {
+    flex: 1 0 25%;
+    max-width: 400px;
+    background-color: var(--white-color);
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.slide img {
+    margin-bottom: 16px;
+}
+
+.product-details .product-title,
+.product-details .prodict-price {
+    margin-bottom: 12px;
+}
+
+.product-details-more-btn {
+    margin: 0 auto;
+    color: var(--white-color);
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: var(--main-color);
+    padding: 10px 40px;
+}
+
+/* ! ---------------------------------- gllary ---------------------------------- ! */
+
+.gallery {
+    margin-bottom: 460px;
+    margin-top: 80px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gallery img {
+    display: block;
+    width: 540px;
+    height: 380px;
+}
+
+.gallery-title {
+    padding: 36px 7px;
+}
+
+.gallery-image-second {
+    background-color: var(--white-color);
+    padding-left: 20px;
+    padding-top: 20px;
+    border-bottom-right-radius: 222px;
+    overflow: hidden;
+    bottom: -140px;
+    right: 342px;
+    z-index: 1;
+    border-top: 1px solid var(--gray-color4);
+}
+
+.gallery-text-box {
+    padding: 80px 0 36px 48px;
+    background-color: var(--gold-color2);
+    width: 60%;
+    border-top-right-radius: 444px;
+    bottom: -370px;
+    right: 0;
+}
+
+.gallery-text-box p {
+    width: 80%;
+    margin-right: auto;
+    line-height: 36px;
+    text-align: justify;
+    color: var(--white-color);
+}
+
+/* ! ---------------------------------- handicrafts ---------------------------------- ! */
+.handicrafts {
+    margin-bottom: 320px;
+}
+
+.handicrafts .handicrafts-title {
+    margin-bottom: 50px;
+}
+
+.boxs-container {
+    gap: 36px;
+}
+
+.boxs-container .box {
+    z-index: 2;
+    width: 384px;
+    height: 224px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.box .box-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.box .box-text {
+    line-height: 24px;
+}
+
+.boxs-container .box img {
+    width: 55px;
+    height: 55px;
+}
+
+.handicrafts-bg-image {
+    width: 384px;
+}
+
+/* ! ----------------------------------  article ---------------------------------- ! */
+.article {
+    background-color: var(--gold-color2);
+    border-radius: 55px;
+    margin-bottom: 320px;
+}
+
+.article-image {
+    right: 50%;
+    transform: translateX(50%);
+    z-index: -1;
+}
+
+.article .image-top {
+    bottom: 94%;
+}
+
+.article .image-bottom {
+    top: 94%;
+}
+
+.article-content {
+    height: 500px;
+    margin: 24px;
+    border-radius: 24px;
+    overflow: hidden;
+    max-width: 444px;
+    background-color: var(--white-color);
+}
+
+.article-title {
+    padding: 0 28px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.article-desc {
+    line-height: 24px;
+    text-align: justify;
+    padding: 0 28px;
+    color: var(--gray-color5);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.article-line-container {
+    margin: 12px auto;
+}
+
+.article-line-container .article-line {
+    display: block;
+    background-color: var(--gold-color2);
+    width: 60%;
+    height: 2px;
+}
+
+.article-more {
+    padding-bottom: 28px;
+}
+
+.article-more-btn {
+    border-radius: 24px;
+    padding: 12px;
+    background-color: var(--main-color);
+    width: 144px;
+    color: var(--white-color);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* ! ----------------------------------  description store ---------------------------------- ! */
+.description-store {
+    margin-bottom: 80px;
+}
+
+.description-store-image {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.description-store-title {
+    margin-bottom: 36px;
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.description-store-text {
+    line-height: 36px;
+}
+
+/* ! ---------------------------------- media query ---------------------------------- ! */
+/* ! ---------------------------------- X Small ---------------------------------- ! */
+@media (max-width:575.98px) {
+    /* ! ---------------------------------- article ---------------------------------- ! */
+    .article {
+        margin-bottom: 160px !important;
+    }
+
+    .article-image {
+        max-width: 486px;
+        z-index: 1;
+    }
+
+    /* ! ---------------------------------- product popluar ---------------------------------- ! */
+    .bg-circle-product-popluar .img-circle {
+        width: 167px !important;
+        height: 167px !important;
+    }
+
+    /* ! ---------------------------------- header---------------------------------- ! */
+    .header .header-mobile {
+        padding: 0 8px !important;
+    }
+}
+
+/* ! ---------------------------------- Small ---------------------------------- ! */
+@media (max-width:767.98px) {
+
+    /* ! ---------------------------------- handicrafts ---------------------------------- ! */
+    .handicrafts .boxs-container .box {
+        height: 176px;
+        width: 176px;
+    }
+
+    .handicrafts .box .box-title {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .handicrafts .box-text {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .handicrafts .boxs-container .box img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .handicrafts .handicrafts-bg-image {
+        width: 176px;
+    }
+
+    /* ! ---------------------------------- article ---------------------------------- ! */
+    .article-image {
+        max-width: 536px;
+    }
+
+    /* ! ---------------------------------- product popluar ---------------------------------- ! */
+
+    .bg-circle-product-popluar .img-circle {
+        width: 280px;
+        height: 280px;
+    }
+
+    /* ! ---------------------------------- banner image ---------------------------------- ! */
+
+    .banner-right .banner-image-circle img {
+        top: 0 !important;
+    }
+}
+
+/* ! ---------------------------------- Medium ---------------------------------- ! */
+@media (max-width:991.98px) {
+
+    /* ! ---------------------------------- banner ---------------------------------- ! */
+    .banner-copper-image {
+        width: 450px !important;
+    }
+
+    .banner-sotial {
+        width: 290px !important;
+    }
+
+    .phone-number {
+        left: 75px !important;
+    }
+}
+
+/* ! ---------------------------------- Large ---------------------------------- ! */
+@media (max-width:1199.98px) {
+
+    /* ! ---------------------------------- header ---------------------------------- ! */
+    .header {
+        margin-bottom: 0;
+    }
+
+    .header .header-mobile {
+        padding: 0 30px;
+    }
+
+    .banner-image-circle img {
+        top: 0;
+        width: 140px;
+    }
+
+    .banner-right .banner-image-circle img {
+        top: 50%;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .banner-text {
+        margin-top: 0;
+    }
+
+    /* ! ---------------------------------- header ---------------------------------- ! */
+    .article {
+        margin-bottom: 250px;
+    }
+
+    /* ! ---------------------------------- description ---------------------------------- ! */
+    .description-store-title {
+        margin-bottom: 16px;
+    }
+}
+
+/* ! ---------------------------------- X Large ---------------------------------- ! */
+@media (max-width:1299.98px) {
+    .navbar-manu {
+        padding: 0;
+    }
+
+    /* ! ---------------------------------- gallery ---------------------------------- ! */
+    .gallery-text-box {
+        bottom: -400px;
+    }
+
+    /* ! ---------------------------------- handicrafts ---------------------------------- ! */
+
+    .handicrafts {
+        margin-top: 80px;
+        margin-bottom: 190px;
+    }
+
+    .handicrafts-title {
+        font-size: 20px;
+    }
+}
+
+/* ! ---------------------------------- XX Large ---------------------------------- ! */
+@media (max-width:1439.98px) {
+
+    /* ! ---------------------------------- banner ---------------------------------- ! */
+    .banner-copper-image {
+        width: 500px;
+    }
+
+    .banner-sotial {
+        width: 360px;
+    }
+
+    .phone-number {
+        left: 145px;
+    }
+
+    .banner-image-circle img {
+        width: 170px;
+    }
+}

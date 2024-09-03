@@ -1,0 +1,84 @@
+.header {
+    padding: 0;
+}
+
+body {
+    background-image: url('../../src/assets/images/bg-contact.png');
+    background-position: fixed;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contact {
+    background-color: var(--cream-color2);
+    border-radius: 12px;
+    margin: 36px auto;
+}
+
+/* ! ---------------------------------- contact header---------------------------------- ! */
+.contact-header {
+    margin-bottom: 28px;
+}
+
+.contact-header .contact-header-img {
+    height: 96px;
+}
+
+.contact-header .contact-header-title {
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--gold-color5);
+}
+
+/* ! ---------------------------------- contact main ---------------------------------- ! */
+.phone-number-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.phone-number-icon-text {
+    font-size: 17px;
+}
+
+.phone-number {
+    color: var(--dark-color);
+    font-size: 17px;
+}
+
+/* ! ---------------------------------- contact footer ---------------------------------- ! */
+.contact-footer {
+    padding: 20px 0 40px 0;
+
+}
+
+.social-title {
+    padding: 28px 0;
+    font-size: 18px;
+    color: var(--gold-color5);
+}
+
+.social-icons a svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* ! ---------------------------------- media query ---------------------------------- ! */
+/* ! ---------------------------------- Small ---------------------------------- ! */
+@media (max-width:767.98px) {
+    .contact-header-title {
+        padding-top: 30px;
+    }
+
+    .header {
+        padding: 0;
+    }
+}
+
+/* ! ---------------------------------- Medium ---------------------------------- ! */
+@media (max-width:991.98px) {
+    .contact-header .contact-header-img {
+        height: 70px;
+    }
+
+}

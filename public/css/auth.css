@@ -1,0 +1,80 @@
+@import url(custom.css);
+@import url(forms.css);
+
+body {
+    background-color: var(--cream-color);
+    background-image: url('../../src/assets/images/download.svg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* ! ---------------------------------- main---------------------------------- ! */
+.main {
+    margin-bottom: 40px;
+}
+
+/* ! ---------------------------------- auth logo ---------------------------------- ! */
+.logo-container .logo-img {
+    width: 224px;
+    height: 224px;
+}
+
+/* ! ---------------------------------- auth form ---------------------------------- ! */
+.auth-form-right {
+    padding: 0 36px;
+}
+
+.auth-form-wrapper {
+    background-color: var(--white-color);
+    border-radius: 12px;
+}
+
+/* ! ---------------------------------- auth form right ---------------------------------- ! */
+.auth-form-title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 36px 0 20px 0;
+}
+
+/* ! ---------------------------------- auth form left ---------------------------------- ! */
+.auth-form-left .auth-image {
+    object-fit: cover;
+}
+.link-to-register{
+    padding: 20px;
+}
+.link-to-register a{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+/* ! ---------------------------------- media query ---------------------------------- ! */
+/* ! ---------------------------------- X Small ---------------------------------- ! */
+@media (max-width:575.98px) {
+    .logo-container .logo-img {
+        width: 135px !important;
+        height: 135px !important;
+    }
+}
+
+/* ! ---------------------------------- Small ---------------------------------- ! */
+@media (max-width:767.98px) {
+    .logo-container .logo-img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .header {
+        padding: 15px 0;
+    }
+}
+
+/* ! ---------------------------------- Medium ---------------------------------- ! */
+@media (max-width:991.98px) {}
+
+/* ! ---------------------------------- Large ---------------------------------- ! */
+@media (max-width:1199.98px) {}
+
+/* ! ---------------------------------- X Large ---------------------------------- ! */
+@media (max-width:1299.98px) {}

@@ -1,0 +1,119 @@
+@import url(custom.css);
+
+* {
+    box-sizing: border-box;
+}
+
+.main {
+    margin: 36px 0;
+}
+
+/* ! ---------------------------------- dashboard aside---------------------------------- ! */
+.dashboard-aside {
+    background-color: var(--cream-color1);
+    padding: 36px 0;
+    border-radius: 12px;
+    height: 384px;
+}
+
+.dashboard-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 36px;
+}
+
+.dashboard-aside-button-group {
+    padding: 0 16px;
+}
+
+.dashboard-aside-button-group .dashboard-btn {
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.dashboard-aside-button-group .exit-btn p {
+    color: var(--brown-color3)
+}
+
+/* ! ---------------------------------- dashboard main---------------------------------- ! */
+.dashboard-main-content {
+    border: 1px solid var(--gold-color2);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.dashboard-main-btn {
+    background-color: var(--white-color);
+    font-size: 36px;
+    width: 48px;
+    height: 48px;
+    padding: 4px;
+    border-radius: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    color: var(--red-color);
+    margin: 12px 0;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.dashboard-main-product-info {
+    padding: 0 36px;
+    margin-bottom: 30px;
+}
+
+.dashboard-product-image {
+    width: 160px;
+    height: 160px;
+}
+
+.dashboard-product-image .product-image {
+    border-radius: 12px;
+}
+
+.dashboard-product-count {
+    height: 36px;
+}
+
+.counter-input input {
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+    padding: 0 12px;
+}
+
+.counter-btn {
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 12px;
+    color: var(--white-color);
+    background-color: var(--gold-color5);
+}
+
+.counter-btn:hover {
+    background-color: var(--gold-hover2);
+}
+
+.account-settlement {
+    margin: 24px 0;
+}
+
+.account-settlement-btn {
+    background-color: var(--gold-color4);
+    padding: 10px 22px;
+    border-radius: 5px;
+    color: var(--white-color);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.account-settlement-btn:hover {
+    background-color: var(--gold-hover1);
+}
