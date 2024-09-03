@@ -103,7 +103,6 @@ const displayProductsList = (allProducts, productsContainer) => {
     allProducts.forEach(product => {
         let slide = document.createElement('div');
         slide.className = 'swiper-slide';
-        
         slide.innerHTML = `
             <div class="swiper-slide">
               <div class="product-category d-flex flex-col gap-16">
