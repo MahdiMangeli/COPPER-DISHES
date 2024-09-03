@@ -75,7 +75,7 @@ const getCategory = async () => {
                                 <img src="${image}" class=" w-100">
                             </div>
                         </div>
-                        `)
+                        `);
                 })
             }
         });

@@ -1,0 +1,15 @@
+{
+  "name": "copper-dishes-page",
+  "version": "1.0.0",
+  "description": "The practice project is the same as the Naqshnegar copperware sales site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mahdi Mangeli",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.2"
+  }
+}
