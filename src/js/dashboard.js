@@ -156,7 +156,7 @@ const totalPriceBasket = (products) => {
   let total = products.reduce(function (prev, current) {
     console.log('prev', prev)
     console.log('current', current)
-    return prev + current.price*current.count
+    return prev + current.price * current.count
   }, 0)
   totalPriceNumber.innerHTML = Number(total).toLocaleString('fa-IR')
 }

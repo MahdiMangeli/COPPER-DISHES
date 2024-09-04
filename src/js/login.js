@@ -28,10 +28,11 @@ const validationPhoneNumber = (phoneNumber) => {
 btnSubmit.addEventListener('click', (e) => {
     e.preventDefault();
     axios({
-        url: 'http://localhost:3000/users',
+        url: 'http://localhost:3000/api/users',
     }).then(res => {
-        return res.data;
+        return res.data
     }).then(usersArray => {
+        console.log(usersArray)
         usersArray.forEach(user => {
             if (user.phoneNumber === inputPhoneNumber.value && user.password === inputPassword.value) {
                 location.href = 'index.html';

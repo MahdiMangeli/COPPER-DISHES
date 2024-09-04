@@ -78,16 +78,14 @@ btnSubmit.addEventListener('click', (e) => {
         return;
     }
     const newUsers = {
-        id: Math.floor(Math.random() * 9999),
         fullName: fullName,
         phoneNumber: phoneNumber,
         password: password,
         confrimPassword: confrimPassword,
-
     };
     axios({
         method: 'post',
-        url: 'http://localhost:3000/users',
+        url: 'http://localhost:3000/api/users',
         data: newUsers,
     }).then(res => {
         Toast.fire({
