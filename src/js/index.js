@@ -38,19 +38,10 @@ new Swiper('.swiper-article', {
   },
   grabCursor: true,
 });
-//!Swiper Product Images
-new Swiper('.swiper-product-images', {
-  slidesPerView: 1,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  grabCursor: true,
-});
 
 const showProducts = async () => {
   await axios({
-    url: 'http://localhost:3000/productsCopper',
+    url: 'http://localhost:3000/api/products',
   })
     .then(res => res.data)
     .then(data => {
@@ -65,7 +56,7 @@ const showProducts = async () => {
                       <div class="prodict-price d-flex justify-end">
                     ${Number(product.price).toLocaleString('fa-IR')}
                       </div>
-                      <a href="product.html?id=${product.id}">
+                      <a href="product.html?id=${product._id}">
                       <button class="product-details-more-btn d-flex align-center cursor-pointer gap-8">
                         بیشتر
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none">

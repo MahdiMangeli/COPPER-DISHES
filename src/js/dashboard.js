@@ -6,8 +6,11 @@ const ordersBtn = document.querySelector('.orders-btn');
 const exitBtn = document.querySelector('.exit-btn');
 
 const getCartProduct = async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userId = user._id
+
   const res = await axios({
-    url: 'http://localhost:3000/shoppingCart'
+    url: `http://localhost:3000/api/shoppingcarts/${userId}`
   });
   let data = res.data;
   return data;
@@ -18,7 +21,7 @@ const filterProductsByUser = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
   dashboardMainContent.innerHTML = '<h2 class="dashboard-title">سبد خرید شما</h2>'
   let products = cartProducts.filter(product => {
-    return Number(product.userId) === Number(user.id);
+    return product.userId === user._id;
   });
   return products;
 }
@@ -28,7 +31,7 @@ const showProducts = async () => {
   if (products) {
     products.forEach(product => {
       dashboardMainContent.insertAdjacentHTML('beforeend', `
-           <button class="dashboard-main-btn d-flex align-center justify-center" onclick="deleteProductFromCart(${product.id},${product.userId},'${product.name}')">
+           <button class="dashboard-main-btn d-flex align-center justify-center" onclick="deleteProductFromCart('${product._id}','${product.userId}','${product.name}')">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
                   class="cursor-pointer w-9 h-9" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                   <path fill="none" stroke-miterlimit="10" stroke-width="32"
@@ -46,7 +49,7 @@ const showProducts = async () => {
                   <div class="dashboard-product-count d-flex align-center gap-8 w-100 justify-center">
                     <button type="button" class="counter-btn increaser-btn h-100 cursor-pointer">+</button>
                     <div class="counter-input w-20 h-100">
-                      <input class="w-100 h-100" type="number" max="20" data-productid="${product.id}" data-userid="${product.userId}" value="${product.count}">
+                      <input class="w-100 h-100" type="number" max="20" data-productid="${product._id}" data-userid="${product.userId}" value="${product.count}">
                     </div>
                     <button type="button" class="counter-btn decrease-btn h-100 cursor-pointer">-</button>
                   </div>
@@ -77,6 +80,7 @@ const productCounter = (products) => {
       currentCount = Number(event.target.value)
       if (currentCount > minValue && currentCount < maxValue) {
         updateProductCount(products, event.target.dataset.productid, event.target.dataset.userid, currentCount)
+        totalPriceBasket(products);
       }
     })
   });
@@ -92,6 +96,7 @@ const productCounter = (products) => {
         currentCount += 1;
         counterInput.value = currentCount;
         updateProductCount(products, counterInput.dataset.productid, counterInput.dataset.userid, currentCount);
+        totalPriceBasket(products)
       }
     });
 
@@ -102,25 +107,27 @@ const productCounter = (products) => {
         currentCount -= 1;
         counterInput.value = currentCount;
         updateProductCount(products, counterInput.dataset.productid, counterInput.dataset.userid, currentCount)
+        totalPriceBasket(products)
       }
     })
   });
 }
-//!Update Count
+// //!Update Count
 const updateProductCount = async (products, productId, userId, newCount) => {
   const findProduct = products.find(product => {
-    return Number(product.id) === Number(productId) && Number(product.userId) === Number(userId)
+    return product._id === productId && product.userId === userId
   })
   if (findProduct) {
     try {
-      await axios.put(`http://localhost:3000/shoppingCart/${productId}?userId=${userId}`, {
+      await axios.put(`http://localhost:3000/api/shoppingcarts/${productId}/${userId}`, {
         id: productId,
         userId: userId,
         name: findProduct.name,
         image: findProduct.image,
         price: findProduct.price,
         count: newCount,
-      })
+      });
+      totalPriceBasket(products)
     }
     catch (error) {
       alert('مشکلی پیش امده است  لطفا صبور باشید🙏')
@@ -140,13 +147,15 @@ const deleteProductFromCart = (productId, userId, productName) => {
     confirmButtonText: 'بله',
   }).then(async result => {
     if (result.isConfirmed) {
-      await axios.delete(`http://localhost:3000/shoppingCart/${productId}`, {
+      await axios.delete(`http://localhost:3000/api/shoppingcarts/${productId}/${userId}`, {
         params: { userId },
       });
       Swal.fire({
         title: "حذف شد",
         text: `${productName} از سبد خرید شما حذف شد`,
         icon: 'success',
+      }, () => {
+      console.log(";")
       })
     }
   })
@@ -154,8 +163,6 @@ const deleteProductFromCart = (productId, userId, productName) => {
 //! Total Price Basket
 const totalPriceBasket = (products) => {
   let total = products.reduce(function (prev, current) {
-    console.log('prev', prev)
-    console.log('current', current)
     return prev + current.price * current.count
   }, 0)
   totalPriceNumber.innerHTML = Number(total).toLocaleString('fa-IR')
@@ -165,7 +172,6 @@ ordersBtn.addEventListener('click', () => {
   dashboardMain.classList.replace('d-none', 'd-block')
 }, { once: true });
 showProducts();
-
 
 exitBtn.addEventListener('click', () => {
   location.href = 'index.html';

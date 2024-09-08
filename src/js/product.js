@@ -8,38 +8,48 @@ const productImageWrap = document.querySelector('.product-image-wrap');
 
 let locationSearch = location.search;
 const locationSearchParams = new URLSearchParams(locationSearch);
-let productIDParam = Number(locationSearchParams.get('id'));
-
+let productIDParam = locationSearchParams.get('id');
+const user = JSON.parse(localStorage.getItem('user'));
+const userId = user._id
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     timer: 2000,
     timerProgressBar: true,
 });
+//!Swiper Product Images
+new Swiper('.swiper-product-images', {
+    slidesPerView: 1,
+    autoplay: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    grabCursor: true,
+});
 
 const getCategorys = async () => {
-    return await axios.get('http://localhost:3000/categories').then(res => res.data);
+    return await axios.get('http://localhost:3000/api/categorys').then(res => res.data);
 }
 
 const getProducts = async () => {
-    return await axios.get('http://localhost:3000/productsCopper').then(res => res.data);
+    return await axios.get('http://localhost:3000/api/products').then(res => res.data);
 }
 
 const getShoppingCart = async () => {
-    return await axios.get(`http://localhost:3000/shoppingCart`).then(res => res.data);
+    return await axios.get(`http://localhost:3000/api/shoppingcarts/${userId}`).then(res => res.data);
 }
 
 const showProduct = async () => {
+
     const [categorys, products] = await Promise.all([getCategorys(), getProducts()])
     let product = products.find(product => {
-        return Number(product.id) === productIDParam;
+        return product._id === productIDParam;
     });
-
     if (product) {
         let category = categorys.find(category => {
-            return Number(category.id) === product.category;
+            return category._id === product.category._id;
         });
-
         if (category) {
             productType.innerHTML = `جنس: ${category.name}`;
         }
@@ -63,7 +73,6 @@ const showProduct = async () => {
 
 const zoomImage = () => {
     const imageContainers = document.querySelectorAll('.product-big-image');
-
     imageContainers.forEach(imageContainer => {
         const image = imageContainer.querySelector('img');
         imageContainer.addEventListener('click', () => {
@@ -96,15 +105,13 @@ const addToCart = async () => {
 
     let products = await getProducts();
     let shoppingCart = await getShoppingCart();
-
+console.log(shoppingCart)
     let product = products.find(product => {
-        return Number(product.id) === productIDParam;
+        return product._id === productIDParam;
     });
-
     let isProductInCart = shoppingCart.some(item => {
-        return Number(item.id) === Number(product.id) && Number(item.userId) === Number(user.id)
-    });;
-
+        return product._id === item.productId._id && item.userId === user._id
+    });
     if (isProductInCart) {
         Toast.fire({
             icon: 'warning',
@@ -113,8 +120,8 @@ const addToCart = async () => {
         })
     } else {
         const shoppingCartObject = {
-            id: product.id,
-            userId: user.id,
+            productId: product._id,
+            userId: user._id,
             name: product.name,
             price: product.price,
             image: product.images[0],
@@ -123,8 +130,11 @@ const addToCart = async () => {
         try {
             const res = await axios({
                 method: 'POST',
-                url: 'http://localhost:3000/shoppingCart',
-                data: shoppingCartObject
+                url: 'http://localhost:3000/api/shoppingcarts',
+                data: shoppingCartObject,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
             Toast.fire({
                 icon: 'success',

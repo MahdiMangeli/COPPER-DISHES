@@ -5,7 +5,7 @@ const btnSubmit = document.querySelector('.btn-submit');
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
-    timer: 3000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -36,7 +36,7 @@ btnSubmit.addEventListener('click', (e) => {
         usersArray.forEach(user => {
             if (user.phoneNumber === inputPhoneNumber.value && user.password === inputPassword.value) {
                 location.href = 'index.html';
-                localStorage.setItem('user', JSON.stringify(user))
+                localStorage.setItem('user', JSON.stringify(user));
             }
             else {
                 Swal.fire({

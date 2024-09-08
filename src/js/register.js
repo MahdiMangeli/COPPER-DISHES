@@ -1,3 +1,4 @@
+
 const form = document.querySelector('.form');
 const inputFullName = document.querySelector('#input-full-name')
 const inputPhoneNumber = document.querySelector('#input-phone-number')
@@ -8,7 +9,7 @@ const btnSubmit = document.querySelector('.btn-submit');
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
-    timer: 3000,
+    timer: 2000,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -16,6 +17,12 @@ const Toast = Swal.mixin({
     }
 })
 
+const clearInputs = () => {
+    inputFullName.value = '';
+    inputPhoneNumber.value = '';
+    inputPassword.value = '';
+    inputConfirmPassword.value = '';
+}
 const validationInputs = () => {
     const inputs = [inputFullName, inputPhoneNumber, inputPassword, inputConfirmPassword];
     for (const input of inputs) {
@@ -29,6 +36,14 @@ const validationInputs = () => {
         }
     }
     return true;
+}
+const userExists = async () => {
+    const res = await axios.get('http://localhost:3000/api/users')
+    let data = res.data;
+    let filterExistingUsers = data.some(user => {
+        return user.phoneNumber === inputPhoneNumber.value
+    })
+    return filterExistingUsers;
 }
 
 const validationPhoneNumber = (phoneNumber) => {
@@ -67,8 +82,8 @@ const validationPassword = (password, confrimPassword) => {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 });
-
-btnSubmit.addEventListener('click', (e) => {
+const addUser = async () => {
+    let isUser = await userExists();
     const fullName = inputFullName.value.trim();
     const phoneNumber = inputPhoneNumber.value.trim();
     const password = inputPassword.value.trim();
@@ -77,27 +92,46 @@ btnSubmit.addEventListener('click', (e) => {
     if (!validationInputs() || !validationPhoneNumber(phoneNumber) || !validationPassword(password, confrimPassword)) {
         return;
     }
-    const newUsers = {
-        fullName: fullName,
-        phoneNumber: phoneNumber,
-        password: password,
-        confrimPassword: confrimPassword,
-    };
-    axios({
-        method: 'post',
-        url: 'http://localhost:3000/api/users',
-        data: newUsers,
-    }).then(res => {
-        Toast.fire({
-            icon: 'success',
-            title: 'ثبت نام موفق',
-            text: "ثبت نام نام شما با موفقیت انجام شد"
-        });
-    }).catch(err => {
+
+    if (isUser) {
         Toast.fire({
             icon: 'error',
-            title: 'ثبت نام نا موفق',
-            text: "ثبت نام نام شما با شکست مواجه شد"
+            title: 'خطا',
+            text: 'این شماره موبایل قبلا ثبت نام کرده است'
         });
-    })
-})
+    }
+    else {
+        const newUsers = {
+            fullName: fullName,
+            phoneNumber: phoneNumber,
+            password: password,
+            confrimPassword: confrimPassword,
+        };
+        try {
+            const res = await axios({
+                method: "POST",
+                url: "http://localhost:3000/api/users",
+                data: newUsers,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: 'ثبت نام موفق',
+                text: "ثبت نام  شما با موفقیت انجام شد"
+            });
+            clearInputs();
+            setTimeout(() => {
+                location.href = 'index.html'
+            }, 1000);
+        } catch (err) {
+            Toast.fire({
+                icon: 'error',
+                title: 'ثبت نام نا موفق',
+                text: "ثبت نام نام شما با شکست مواجه شد"
+            });
+        }
+    }
+}
+btnSubmit.addEventListener('click', addUser);

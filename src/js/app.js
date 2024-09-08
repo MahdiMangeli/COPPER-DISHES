@@ -1,24 +1,39 @@
-import './utils.js'
+import './utils.js';
 
+const navbarButtons = document.querySelectorAll('.navbar-btn a');
 const navbarSubmenus = document.querySelectorAll('.navbar-submenu');
-navbarSubmenus.forEach(submenu => {
-    submenu.innerHTML = ''
-    axios({
-        url: 'http://localhost:3000/categories'
+const listOurProducts = document.querySelector('.list-our-products')
+
+listOurProducts.innerHTML = ''
+// navbarSubmenus.innerHTML = '';
+const showCategorysInSubMenu = async () => {
+    await axios({
+        url: 'http://localhost:3000/api/categorys'
     }).then(res => res.data)
         .then(data => {
             data.forEach(category => {
-                submenu.insertAdjacentHTML('beforeend', `
-                <li class="navbar-submenu-item">
-                <a href="category.html?id=${category.id}" class="navbar-submenu-item-link w-100 d-block">${category.name}</a>
-                </li>
-                `)
-            })
-        })
-})
-const navbarButtons = document.querySelectorAll('.navbar-btn a');
+                navbarSubmenus.forEach(submenu => {
+                    // submenu.innerHTML = ''
+                    submenu.insertAdjacentHTML('beforeend', `
+                        <li class="navbar-submenu-item">
+                        <a href="category.html?id=${category._id}" class="navbar-submenu-item-link w-100 d-block">${category.name}</a>
+                        </li>
+                        `);
+                });
 
-window.addEventListener('load', () => {
+                listOurProducts.insertAdjacentHTML('beforeend', `
+                 <li>
+                   <a href="category.html?id=${category._id}">${category.name}</a>
+                 </li>
+                 `)
+            });
+
+        });
+}
+
+
+window.addEventListener('load', async () => {
+    await showCategorysInSubMenu();
     let getUserFromLocal = JSON.parse(localStorage.getItem('user'));
     if (getUserFromLocal) {
         navbarButtons.forEach(btn => {

@@ -36,10 +36,9 @@ const swiperProducts = new Swiper('.swiper-products', {
       return `<span class="${className}">${index + 1}</span>`
     }
   },
-
 });
 const getProducts = async () => {
-  return await axios({ url: 'http://localhost:3000/productsCopper' }).then(res => res.data).then(data => data);
+  return await axios({ url: 'http://localhost:3000/api/products' }).then(res => res.data).then(data => data);
 }
 
 const displayProductsList = async (allProducts) => {
@@ -47,6 +46,7 @@ const displayProductsList = async (allProducts) => {
   let fragment = document.createDocumentFragment();
   let slide;
   allProducts.forEach(product => {
+    console.log(product)
     slide = document.createElement('div');
     slide.className = 'swiper-slide';
     slide.innerHTML = `
@@ -59,15 +59,17 @@ const displayProductsList = async (allProducts) => {
                   </div>
                   <div class="product-price">${Number(product.price).toLocaleString('fa-IR')}</div>
                   <div class="product-more-info">
-                    <a href="product.html?id=${product.id}" class="d-flex justify-center btn-more-info w-100 cursor-pointer">بیشتر</a>
+                    <a href="product.html?id=${product._id}" class="d-flex justify-center btn-more-info w-100 cursor-pointer">بیشتر</a>
                   </div>
                 </div>
               </div>
               </div>`
+
     fragment.appendChild(slide);
   });
   slideWrapp.appendChild(fragment);
 }
+
 // ! Sort Products By Newest 
 const sortedProducts = async () => {
   let products = await getProducts();
@@ -83,7 +85,6 @@ const sortedProducts = async () => {
     displayProductsList(filteredProductsByNewest);
   }
 }
-
 
 // ! Filtered Products By Best Sellers
 const topSellingProduts = async () => {
@@ -113,6 +114,7 @@ const showAllProducts = async () => {
   let products = await getProducts();
   displayProductsList(products)
 }
+// ! Filter Buttons
 const filterButtons = () => {
   let prevActive;
   filterProductsElems.forEach(elem => {

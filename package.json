@@ -4,7 +4,8 @@
   "description": "The practice project is the same as the Naqshnegar copperware sales site",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node api/server.js"
   },
   "keywords": [],
   "author": "Mahdi Mangeli",

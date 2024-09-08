@@ -52,21 +52,21 @@ const swiperProductList = new Swiper('.swiper-product-list', {
 
 let locationSearch = location.search;
 const locationSearchParams = new URLSearchParams(locationSearch);
-let categoryIDParams = Number(locationSearchParams.get('id'));
+let categoryIDParams = locationSearchParams.get('id');
 
 const getCategory = async () => {
     await axios({
-        url: 'http://localhost:3000/categories'
+        url: 'http://localhost:3000/api/categorys'
     }).then(res => res.data)
         .then(data => {
             let findCategoryName = data.find(category => {
-                return Number(category.id) === categoryIDParams;
+                return category._id === categoryIDParams;
             })
             if (findCategoryName) {
                 descriptionTitle.innerHTML = findCategoryName.name;
                 productsCategoryTitle.innerHTML = findCategoryName.name;
-                discriptionHistoryTitle.innerHTML = findCategoryName.categorieHistory
-                descriptionHistoryProductText.innerHTML = findCategoryName.categorieHistoryDescription
+                discriptionHistoryTitle.innerHTML = findCategoryName.categoryHistory
+                descriptionHistoryProductText.innerHTML = findCategoryName.categoryHistoryDescription
                 descriptionProductText.innerHTML = findCategoryName.categoryDescription
                 findCategoryName.images.forEach(image => {
                     slideWrappBanner.insertAdjacentHTML('beforeend', `
@@ -83,12 +83,12 @@ const getCategory = async () => {
 getCategory()
 const getProducts = async () => {
     await axios({
-        url: 'http://localhost:3000/productsCopper',
+        url: 'http://localhost:3000/api/products',
     })
         .then(res => res.data)
         .then(data => {
             let filteredProductsByCategory = data.filter((product) => {
-                return Number(product.category) === categoryIDParams;
+                return product.category._id === categoryIDParams;
             })
             if (filteredProductsByCategory) {
                 displayProductsList(filteredProductsByCategory, slideWrapp)
@@ -113,7 +113,7 @@ const displayProductsList = (allProducts, productsContainer) => {
                   </div>
                   <div class="product-price">${Number(product.price).toLocaleString('fa-IR')}</div>
                   <div class="product-more-info">
-                    <a href="product.html?id=${product.id}" class="d-flex justify-center btn-more-info w-100 cursor-pointer">بیشتر</a>
+                    <a href="product.html?id=${product._id}" class="d-flex justify-center btn-more-info w-100 cursor-pointer">بیشتر</a>
                   </div>
                 </div>
               </div>
