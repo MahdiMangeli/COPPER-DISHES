@@ -61,12 +61,12 @@ const showProduct = async () => {
         productName.innerHTML = product.name;
         product.images.forEach(image => {
             productImageWrap.insertAdjacentHTML('beforeend', `
-                <div class="swiper-slide">
+              <div class="swiper-slide">
                 <div class="product-big-image overflow-hidden w-md-100">
                   <img src="${image}" alt="Photo" class="w-100" />
                 </div>
               </div>`);
-        })
+        });
         zoomImage();
     }
 }

@@ -7,6 +7,7 @@
     <title>تماس با ما</title>
     <link rel="icon" type="image/png" href="src/assets/images/logo-copper.png">
     <link rel="stylesheet" href="public/css/custom.css">
+    <link rel="stylesheet" href="public/css/cartaside.css">
     <link rel="stylesheet" href="public/css/contactus.css">
 </head>
 
@@ -17,6 +18,33 @@
             <!--!---------------------------------- logo ----------------------------------!-->
             <div class="logo w-sm-25">
                 <img class="img-logo w-100" src="src/assets/images/logo-copper.png" alt="" />
+            </div>
+            <!--!--------------------------------- cart aside -----------------------------------!-->
+            <div class="cart-aside position-absolute">
+                <div class="dark-blur position-fixed w-100 h-100"></div>
+                <div class="cart-aside-content position-fixed h-100">
+                    <div class="cart-aside-header d-flex align-center justify-between">
+                        <span class="cart-aside-title">
+                            سبد خرید شما
+                        </span>
+                        <span class="cart-aside-close"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-x-lg cursor-pointer cart-close" viewBox="0 0 16 16">
+                                <path
+                                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                                </path>
+                            </svg></span>
+                    </div>
+                    <div class="dashboard-main-content">
+
+                    </div>
+                    <div class="total-price">
+                        <span class="total-price-text">مجموع سبد خرید:</span>
+                        <span class="total-price">
+                            <span class="total-price-number">0</span>
+                            <span>تومان</span>
+                        </span>
+                    </div>
+                </div>
             </div>
             <!--!---------------------------------- navbar mobile ----------------------------------!-->
             <div class="menu-bar-icon d-none d-sm-block">
@@ -41,7 +69,6 @@
                     <li class="navbar-mobile-manu-item d-flex justify-between flex-col position-relative">
                         <button class="category-btn cursor-pointer w-100">دسته بندی</button>
                         <ul class="navbar-submenu d-flex flex-col gap-16 w-100 disable">
-                           
                         </ul>
                     </li>
                     <li class="navbar-mobile-manu-item">
@@ -63,7 +90,7 @@
                             </a>
                         </button>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                            class="bi bi-bag" viewBox="0 0 16 16">
+                            class="bi bi-bag cursor-pointer cart-icon" viewBox="0 0 16 16">
                             <path
                                 d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
                         </svg>
@@ -86,7 +113,7 @@
                             </svg>
                         </a>
                         <ul class="navbar-submenu d-flex flex-col gap-16 position-absolute">
-                       
+
                         </ul>
                     </li>
                     <li class="navbar-manu-item">
@@ -106,7 +133,7 @@
                         </a>
                     </button>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="bi bi-bag cursor-pointer" viewBox="0 0 16 16">
+                        class="bi bi-bag cursor-pointer cart-icon" viewBox="0 0 16 16">
                         <path
                             d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
                     </svg>
@@ -275,6 +302,7 @@
         </div>
     </footer>
     <script src="src/js/axios.min.js"></script>
+    <script src="src/js/dashboard.js"></script>
     <script src="src/js/app.js" type="module"></script>
 </body>
 

@@ -1,7 +1,11 @@
 const manuBarBtn = document.querySelector('.manu-bar-btn');
 const navbarMobile = document.querySelector('.navbar-mobile');
 const navbarClose = document.querySelector('.navbar-close');
-
+const cartAsideContent = document.querySelector('.cart-aside-content');
+const cartClose = document.querySelector('.cart-close');
+const cartIcons = document.querySelectorAll('.cart-icon');
+const darkBlur = document.querySelector('.dark-blur');
+// console.log()
 //!Show Menu
 const showMenu = () => {
     navbarMobile.classList.remove('navbar-hidden');
@@ -32,6 +36,7 @@ manuBarBtn.addEventListener('click', () => {
 navbarClose.addEventListener('click', () => {
     closeMenu();
 })
+
 //!Category Button Aside In Mode Mobile
 const categoryButton = document.querySelector(".category-btn");
 const navbarSubmenuMobile = document.querySelector(".navbar-submenu");
@@ -40,3 +45,33 @@ categoryButton.addEventListener('click', (event) => {
     navbarSubmenuMobile.classList.toggle('disable');
 })
 
+//! Show Cart Aside
+const showCartAside = () => {
+    cartAsideContent.classList.add('active');
+    darkBlur.classList.add('active');
+    closeMenu()
+}
+
+//! Close Cart Aside
+const closeCartAside = () => {
+    cartAsideContent.classList.remove('active');
+    darkBlur.classList.remove('active');
+}
+
+//! Show Cart Aside Button
+cartClose?.addEventListener('click', () => {
+    closeCartAside();
+});
+
+//! Close Cart Aside Button
+cartIcons.forEach((cartIcon)=>{
+
+    cartIcon?.addEventListener('click', () => {
+        showCartAside()
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('dark-blur')) {
+                closeCartAside();
+            }
+        })
+    })
+})

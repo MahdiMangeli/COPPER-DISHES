@@ -46,7 +46,6 @@ const displayProductsList = async (allProducts) => {
   let fragment = document.createDocumentFragment();
   let slide;
   allProducts.forEach(product => {
-    console.log(product)
     slide = document.createElement('div');
     slide.className = 'swiper-slide';
     slide.innerHTML = `

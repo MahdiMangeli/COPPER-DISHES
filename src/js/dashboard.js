@@ -1,9 +1,9 @@
-
 const dashboardMainContent = document.querySelector('.dashboard-main-content');
-const dashboardMain = document.querySelector('.dashboard-main');
 const totalPriceNumber = document.querySelector('.total-price-number');
+const dashboardMain = document.querySelector('.dashboard-main');
 const ordersBtn = document.querySelector('.orders-btn');
 const exitBtn = document.querySelector('.exit-btn');
+
 
 const getCartProduct = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -15,7 +15,7 @@ const getCartProduct = async () => {
   let data = res.data;
   return data;
 }
-
+//!Filter Products By User 
 const filterProductsByUser = async () => {
   const cartProducts = await getCartProduct();
   const user = JSON.parse(localStorage.getItem('user'));
@@ -26,7 +26,7 @@ const filterProductsByUser = async () => {
   return products;
 }
 //!Show Products
-const showProducts = async () => {
+const showProductsCart = async () => {
   const products = await filterProductsByUser();
   if (products) {
     products.forEach(product => {
@@ -55,15 +55,17 @@ const showProducts = async () => {
                   </div>
                 </div>
                 <div class="dashboard-product-price">
-                  <span class="product-price">${Number(product.price * product.count).toLocaleString('fa-IR')}</span>
+                  <span class="product-price"></span>
                   <span>تومان</span>
                 </div>
               </div>`);
     })
     totalPriceBasket(products)
     productCounter(products)
+    productPrice(products)
   }
 }
+
 //!Product Counter
 const productCounter = (products) => {
   const dashboardProductCount = document.querySelectorAll('.dashboard-product-count');
@@ -79,8 +81,7 @@ const productCounter = (products) => {
     input.addEventListener('change', (event) => {
       currentCount = Number(event.target.value)
       if (currentCount > minValue && currentCount < maxValue) {
-        updateProductCount(products, event.target.dataset.productid, event.target.dataset.userid, currentCount)
-        totalPriceBasket(products);
+        updateProductCount(products, event.target.dataset.productid, event.target.dataset.userid, currentCount);
       }
     })
   });
@@ -96,7 +97,6 @@ const productCounter = (products) => {
         currentCount += 1;
         counterInput.value = currentCount;
         updateProductCount(products, counterInput.dataset.productid, counterInput.dataset.userid, currentCount);
-        totalPriceBasket(products)
       }
     });
 
@@ -107,12 +107,11 @@ const productCounter = (products) => {
         currentCount -= 1;
         counterInput.value = currentCount;
         updateProductCount(products, counterInput.dataset.productid, counterInput.dataset.userid, currentCount)
-        totalPriceBasket(products)
       }
     })
   });
 }
-// //!Update Count
+//!Update Count
 const updateProductCount = async (products, productId, userId, newCount) => {
   const findProduct = products.find(product => {
     return product._id === productId && product.userId === userId
@@ -127,13 +126,24 @@ const updateProductCount = async (products, productId, userId, newCount) => {
         price: findProduct.price,
         count: newCount,
       });
-      totalPriceBasket(products)
+      showProductsCart()
     }
     catch (error) {
       alert('مشکلی پیش امده است  لطفا صبور باشید🙏')
     }
   }
 }
+//!Product Price
+const productPrice = async (products) => {
+  if (products) {
+    products.forEach((product) => {
+      document.querySelectorAll('.product-price').forEach(item => {
+        item.innerHTML = `${Number(product.price * product.count).toLocaleString('fa-IR')}`
+      })
+    });
+  }
+}
+
 //! Delete Product From Cart
 const deleteProductFromCart = (productId, userId, productName) => {
   Swal.fire({
@@ -154,8 +164,10 @@ const deleteProductFromCart = (productId, userId, productName) => {
         title: "حذف شد",
         text: `${productName} از سبد خرید شما حذف شد`,
         icon: 'success',
-      }, () => {
-      console.log(";")
+      }).then(result => {
+        if (result.isConfirmed) {
+          showProductsCart();
+        }
       })
     }
   })
@@ -168,11 +180,11 @@ const totalPriceBasket = (products) => {
   totalPriceNumber.innerHTML = Number(total).toLocaleString('fa-IR')
 }
 
-ordersBtn.addEventListener('click', () => {
+ordersBtn?.addEventListener('click', () => {
   dashboardMain.classList.replace('d-none', 'd-block')
 }, { once: true });
-showProducts();
+showProductsCart();
 
-exitBtn.addEventListener('click', () => {
+exitBtn?.addEventListener('click', () => {
   location.href = 'index.html';
 });
