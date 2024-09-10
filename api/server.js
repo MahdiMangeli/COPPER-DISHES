@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 
-const MONGO_URI = 'mongodb+srv://mahdimangeli:Ma13811381***@copperdishes.vuuv7.mongodb.net';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://mahdimangeli:Ma13811381***@copperdishes.vuuv7.mongodb.net';
 mongoose.connect(MONGO_URI).then(() => {
     console.log("Connection to MongoDB");
 }).catch(err => {
@@ -149,7 +149,7 @@ app.delete('/api/shoppingcarts/:id/:userId', async (req, res) => {
     }
 })
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'../index.html'));
+    res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 const port = process.env.PORT || 3000;
