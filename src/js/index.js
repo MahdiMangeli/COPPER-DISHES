@@ -3,6 +3,7 @@ const popularProductWrap = document.querySelector('.popular-product-wrap');
 new Swiper('.swiper-popular', {
   slidesPerView: 3,
   spaceBetween: 10,
+  grabCursor: true,
   breakpoints: {
     300: {
       slidesPerView: 1
@@ -21,6 +22,7 @@ new Swiper('.swiper-popular', {
 // ! Swiper Article
 new Swiper('.swiper-article', {
   slidesPerView: 'auto',
+  grabCursor: true,
   breakpoints: {
     300: {
       slidesPerView: 1,
