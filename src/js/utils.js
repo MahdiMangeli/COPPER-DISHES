@@ -10,14 +10,12 @@ const darkBlur = document.querySelector('.dark-blur');
 const showMenu = () => {
     navbarMobile.classList.remove('navbar-hidden');
     navbarMobile.classList.add('navbar-active');
-    darkBlur.classList.add('active');
 }
 
 //!Close Menu
 const closeMenu = () => {
     navbarMobile.classList.add('navbar-hidden');
     navbarMobile.classList.remove('navbar-active');
-    darkBlur.classList.remove('active');
 }
 
 //!Manu Bar Btn
