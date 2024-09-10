@@ -1,5 +1,6 @@
 const dashboardMainContent = document.querySelector('.dashboard-main-content');
-const totalPriceNumber = document.querySelector('.total-price-number');
+const cartMainContent = document.querySelector('.cart-main-content');
+const totalPriceNumber = document.querySelectorAll('.total-price-number');
 const dashboardMain = document.querySelector('.dashboard-main');
 const ordersBtn = document.querySelector('.orders-btn');
 const exitBtn = document.querySelector('.exit-btn');
@@ -25,40 +26,46 @@ const filterProductsByUser = async () => {
   });
   return products;
 }
+
 //!Show Products
 const showProductsCart = async () => {
   const products = await filterProductsByUser();
   if (products) {
+    let dashboardContent;
+    cartMainContent.innerHTML = ''
+    dashboardMainContent.innerHTML = ''
     products.forEach(product => {
-      dashboardMainContent.insertAdjacentHTML('beforeend', `
-           <button class="dashboard-main-btn d-flex align-center justify-center" onclick="deleteProductFromCart('${product._id}','${product.userId}','${product.name}')">
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                  class="cursor-pointer w-9 h-9" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="none" stroke-miterlimit="10" stroke-width="32"
-                    d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"></path>
-                  <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
-                    d="M320 320L192 192m0 128l128-128"></path>
-                </svg>
-              </button>
-              <div class="dashboard-main-product-info d-flex align-center justify-between flex-sm-col gap-32">
-                <div class="dashboard-product-image">
-                  <img src="${product.image}" class="product-image w-100 h-100">
-                </div>
-                <div class="d-flex flex-col gap-16 justify-center align-center">
-                  <h2 class="product-name">${product.name}</h2>
-                  <div class="dashboard-product-count d-flex align-center gap-8 w-100 justify-center">
-                    <button type="button" class="counter-btn increaser-btn h-100 cursor-pointer">+</button>
-                    <div class="counter-input w-20 h-100">
-                      <input class="w-100 h-100" type="number" max="20" data-productid="${product._id}" data-userid="${product.userId}" value="${product.count}">
-                    </div>
-                    <button type="button" class="counter-btn decrease-btn h-100 cursor-pointer">-</button>
+      dashboardContent = `
+             <button class="dashboard-main-btn d-flex align-center justify-center" onclick="deleteProductFromCart('${product._id}','${product.userId}','${product.name}')">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                    class="cursor-pointer w-9 h-9" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="none" stroke-miterlimit="10" stroke-width="32"
+                      d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"></path>
+                    <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                      d="M320 320L192 192m0 128l128-128"></path>
+                  </svg>
+                </button>
+                <div class="dashboard-main-product-info d-flex align-center justify-between flex-sm-col gap-32">
+                  <div class="dashboard-product-image">
+                    <img src="${product.image}" class="product-image w-100 h-100">
                   </div>
-                </div>
-                <div class="dashboard-product-price">
-                  <span class="product-price"></span>
-                  <span>تومان</span>
-                </div>
-              </div>`);
+                  <div class="d-flex flex-col gap-16 justify-center align-center">
+                    <h2 class="product-name">${product.name}</h2>
+                    <div class="dashboard-product-count d-flex align-center gap-8 w-100 justify-center">
+                      <button type="button" class="counter-btn increaser-btn h-100 cursor-pointer">+</button>
+                      <div class="counter-input w-20 h-100">
+                        <input class="w-100 h-100" type="number" max="20" data-productid="${product._id}" data-userid="${product.userId}" value="${product.count}">
+                      </div>
+                      <button type="button" class="counter-btn decrease-btn h-100 cursor-pointer">-</button>
+                    </div>
+                  </div>
+                  <div class="dashboard-product-price">
+                    <span class="product-price"></span>
+                    <span>تومان</span>
+                  </div>
+                </div>`;
+      dashboardMainContent.insertAdjacentHTML('beforeend', dashboardContent)
+      cartMainContent.insertAdjacentHTML("beforeend", dashboardContent)
     })
     totalPriceBasket(products)
     productCounter(products)
@@ -176,13 +183,15 @@ const deleteProductFromCart = (productId, userId, productName) => {
 const totalPriceBasket = (products) => {
   let total = products.reduce(function (prev, current) {
     return prev + current.price * current.count
-  }, 0)
-  totalPriceNumber.innerHTML = Number(total).toLocaleString('fa-IR')
+  }, 0);
+
+  totalPriceNumber.forEach(totalPrice => {
+    totalPrice.innerHTML = Number(total).toLocaleString('fa-IR')
+  })
+
 }
 
-ordersBtn?.addEventListener('click', () => {
-  dashboardMain.classList.replace('d-none', 'd-block')
-}, { once: true });
+
 showProductsCart();
 
 exitBtn?.addEventListener('click', () => {

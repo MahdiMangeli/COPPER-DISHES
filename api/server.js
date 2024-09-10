@@ -147,25 +147,8 @@ app.delete('/api/shoppingcarts/:id/:userId', async (req, res) => {
     }
 })
 
-// const data = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+const port = process.env.PORT || 3000;
 
-// data.categorys.forEach(async (category) => {
-//     const newCategory = new Category(category);
-//     await newCategory.save();
-// });
-
-// data.productsCopper.forEach(async (product) => {
-//     const category = await Category.findOne({ id: product.category })
-//     if (category) {
-//         const newProduct = new Product({
-//             ...product,
-//             category: category._id
-//         });
-//         await newProduct.save();
-//     } else {
-//         console.error(`Category not found for id: ${product.category}`);
-//     }
-// });
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log(`Server Runnig on port 3000`)
 })
