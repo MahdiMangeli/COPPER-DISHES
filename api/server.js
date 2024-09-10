@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./User.js');
+const path = require('path');
 const ObjectId = mongoose.Types.ObjectId;
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ mongoose.connect(MONGO_URI).then(() => {
 }).catch(err => {
     console.error('Error connecting to MongoDB:', err);
 });
+app.use(express.static(path.join(__dirname, '../')));
 
 const Category = mongoose.model('Category', new mongoose.Schema({
     id: Number,
@@ -146,9 +148,11 @@ app.delete('/api/shoppingcarts/:id/:userId', async (req, res) => {
         res.status(500).send({ message: 'خطایی رخ داد' })
     }
 })
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,'../index.html'));
+});
 
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
     console.log(`Server Runnig on port 3000`)
 })

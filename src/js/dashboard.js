@@ -20,7 +20,9 @@ const getCartProduct = async () => {
 const filterProductsByUser = async () => {
   const cartProducts = await getCartProduct();
   const user = JSON.parse(localStorage.getItem('user'));
-  dashboardMainContent.innerHTML = '<h2 class="dashboard-title">سبد خرید شما</h2>'
+  if (dashboardMainContent) {
+    dashboardMainContent.innerHTML = '<h2 class="dashboard-title">سبد خرید شما</h2>'
+  }
   let products = cartProducts.filter(product => {
     return product.userId === user._id;
   });
@@ -33,7 +35,9 @@ const showProductsCart = async () => {
   if (products) {
     let dashboardContent;
     cartMainContent.innerHTML = ''
-    dashboardMainContent.innerHTML = ''
+    if (dashboardMainContent) {
+      dashboardMainContent.innerHTML = '';
+    }
     products.forEach(product => {
       dashboardContent = `
              <button class="dashboard-main-btn d-flex align-center justify-center" onclick="deleteProductFromCart('${product._id}','${product.userId}','${product.name}')">
@@ -60,16 +64,16 @@ const showProductsCart = async () => {
                     </div>
                   </div>
                   <div class="dashboard-product-price">
-                    <span class="product-price"></span>
+                    <span class="product-price">${Number(product.price * product.count).toLocaleString('fa-IR')}</span>
                     <span>تومان</span>
                   </div>
                 </div>`;
-      dashboardMainContent.insertAdjacentHTML('beforeend', dashboardContent)
-      cartMainContent.insertAdjacentHTML("beforeend", dashboardContent)
+                cartMainContent.insertAdjacentHTML("beforeend", dashboardContent)
+                dashboardMainContent?.insertAdjacentHTML('beforeend', dashboardContent)
     })
+
     totalPriceBasket(products)
     productCounter(products)
-    productPrice(products)
   }
 }
 
@@ -140,16 +144,6 @@ const updateProductCount = async (products, productId, userId, newCount) => {
     }
   }
 }
-//!Product Price
-const productPrice = async (products) => {
-  if (products) {
-    products.forEach((product) => {
-      document.querySelectorAll('.product-price').forEach(item => {
-        item.innerHTML = `${Number(product.price * product.count).toLocaleString('fa-IR')}`
-      })
-    });
-  }
-}
 
 //! Delete Product From Cart
 const deleteProductFromCart = (productId, userId, productName) => {
@@ -188,12 +182,14 @@ const totalPriceBasket = (products) => {
   totalPriceNumber.forEach(totalPrice => {
     totalPrice.innerHTML = Number(total).toLocaleString('fa-IR')
   })
-
 }
 
-
-showProductsCart();
 
 exitBtn?.addEventListener('click', () => {
   location.href = 'index.html';
 });
+
+window.addEventListener("load", async () => {
+  await showProductsCart();
+
+})
