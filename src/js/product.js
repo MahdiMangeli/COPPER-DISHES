@@ -13,7 +13,10 @@ let locationSearch = location.search;
 const locationSearchParams = new URLSearchParams(locationSearch);
 let productIDParam = locationSearchParams.get('id');
 const user = JSON.parse(localStorage.getItem('user'));
-const userId = user._id
+let userId
+if (user) {
+    userId = user._id
+}
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -104,7 +107,6 @@ const zoomImage = () => {
 }
 
 const addToCart = async () => {
-    let user = JSON.parse(localStorage.getItem('user'));
 
     let products = await getProducts();
     let shoppingCart = await getShoppingCart();
@@ -113,7 +115,7 @@ const addToCart = async () => {
         return product._id === productIDParam;
     });
     let isProductInCart = shoppingCart.some(item => {
-        return product._id === item.productId._id && item.userId === user._id
+        return product._id === item.productId._id && item.userId === userId
     });
     if (isProductInCart) {
         Toast.fire({
@@ -124,7 +126,7 @@ const addToCart = async () => {
     } else {
         const shoppingCartObject = {
             productId: product._id,
-            userId: user._id,
+            userId: userId,
             name: product.name,
             price: product.price,
             image: product.images[0],

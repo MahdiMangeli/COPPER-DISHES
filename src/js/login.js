@@ -35,7 +35,6 @@ btnSubmit.addEventListener('click', (e) => {
     }).then(res => {
         return res.data
     }).then(usersArray => {
-        console.log(usersArray)
         usersArray.forEach(user => {
             if (user.phoneNumber === inputPhoneNumber.value && user.password === inputPassword.value) {
                 location.href = 'index.html';
