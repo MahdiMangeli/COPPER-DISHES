@@ -1,7 +1,7 @@
 const popularProductWrap = document.querySelector('.popular-product-wrap');
 const apiBaseUrlIndex = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
-    : 'https://copperdishes.liara.run/api'
+    : 'https://naghshnegar.liara.run/api'
 
 // ! Swiper Popular Product
 new Swiper('.swiper-popular', {

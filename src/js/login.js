@@ -3,7 +3,7 @@ const inputPassword = document.querySelector('#input-password')
 const btnSubmit = document.querySelector('.btn-submit');
 const apiBaseUrlLogin = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
-    : 'https://copperdishes.liara.run/api'
+    : 'https://naghshnegar.liara.run/api'
 
 const Toast = Swal.mixin({
     toast: true,

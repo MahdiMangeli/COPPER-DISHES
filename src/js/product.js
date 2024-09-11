@@ -7,16 +7,14 @@ const btnAddCart = document.querySelector('.btn-add-cart')
 const productImageWrap = document.querySelector('.product-image-wrap');
 const apiBaseUrlProduct = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
-    : 'https://copperdishes.liara.run/api'
+    : 'https://naghshnegar.liara.run/api'
 
 let locationSearch = location.search;
 const locationSearchParams = new URLSearchParams(locationSearch);
 let productIDParam = locationSearchParams.get('id');
 const user = JSON.parse(localStorage.getItem('user'));
-let userId
-if (user) {
-    userId = user._id
-}
+let userId = user._id
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -47,7 +45,6 @@ const getShoppingCart = async () => {
 }
 
 const showProduct = async () => {
-
     const [categorys, products] = await Promise.all([getCategorys(), getProducts()])
     let product = products.find(product => {
         return product._id === productIDParam;
@@ -110,7 +107,7 @@ const addToCart = async () => {
 
     let products = await getProducts();
     let shoppingCart = await getShoppingCart();
-    console.log(shoppingCart)
+
     let product = products.find(product => {
         return product._id === productIDParam;
     });

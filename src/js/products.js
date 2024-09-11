@@ -2,7 +2,7 @@ let slideWrapp = document.querySelector(".slide-wrapp");
 const filterProductsElems = document.querySelectorAll('.filter-products');
 const apiBaseUrlProducts = window.location.hostname === 'localhost'
   ? 'http://localhost:3000/api'
-  : 'https://copperdishes.liara.run/api'
+  : 'https://naghshnegar.liara.run/api'
 
 // ! Swiper Products
 const swiperProducts = new Swiper('.swiper-products', {

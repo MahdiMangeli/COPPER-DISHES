@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 app.use(cors({
-    origin: 'https://copperdishes.liara.run',
+    origin: 'https://naghshnegar.liara.run',
 }));
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://mahdimangeli:Ma13811381***@copperdishes.vuuv7.mongodb.net';
 

@@ -4,9 +4,6 @@ const showHidePassword = document.querySelectorAll('.input-svg');
 const passwordInput = document.querySelector('.password-group input[type=password]');
 const confirmPasswordInput = document.querySelector('.confirm-password-group input[type=password]');
 
-
-
-
 let isPasswordType = false;
 let input;
 

@@ -6,7 +6,7 @@ const ordersBtn = document.querySelector('.orders-btn');
 const exitBtn = document.querySelector('.exit-btn');
 const apiBaseUrlDashboard = window.location.hostname === 'localhost'
   ? 'http://localhost:3000/api'
-  : 'https://copperdishes.liara.run/api'
+  : 'https://naghshnegar.liara.run/api'
 
 
 const getCartProduct = async () => {
@@ -25,9 +25,14 @@ const filterProductsByUser = async () => {
   if (dashboardMainContent) {
     dashboardMainContent.innerHTML = '<h2 class="dashboard-title">سبد خرید شما</h2>'
   }
+
+
   let products = cartProducts.filter(product => {
-    return product.userId === user._id;
+    if (user) {
+      return product.userId === user._id;
+    }
   });
+
   return products;
 }
 

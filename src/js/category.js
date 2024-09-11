@@ -9,7 +9,7 @@ const descriptionProductText = document.querySelector('.description-product-text
 const productsCategoryTitle = document.querySelector('.products-category-title');
 const apiBaseUrlCategory = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
-    : 'https://copperdishes.liara.run/api'
+    : 'https://naghshnegar.liara.run/api'
 
 let currentPage = 1;
 let productsPerPage;

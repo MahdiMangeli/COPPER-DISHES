@@ -4,7 +4,7 @@ const navbarSubmenus = document.querySelectorAll('.navbar-submenu');
 const listOurProducts = document.querySelector('.list-our-products')
 const apiBaseUrlApp = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
-    : 'https://copperdishes.liara.run/api'
+    : 'https://naghshnegar.liara.run/api'
 
 listOurProducts.innerHTML = ''
 navbarSubmenus.innerHTML = '';
