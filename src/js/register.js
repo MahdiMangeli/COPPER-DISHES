@@ -5,6 +5,9 @@ const inputPhoneNumber = document.querySelector('#input-phone-number')
 const inputPassword = document.querySelector('#input-password')
 const inputConfirmPassword = document.querySelector('#input-confirm-password')
 const btnSubmit = document.querySelector('.btn-submit');
+const apiBaseUrlRegister = window.location.hostname === 'localhost'
+  ? 'http://localhost:3000/api'
+  : 'https://copperdishes.liara.run/api'
 
 const Toast = Swal.mixin({
     toast: true,
@@ -38,7 +41,7 @@ const validationInputs = () => {
     return true;
 }
 const userExists = async () => {
-    const res = await axios.get('http://localhost:3000/api/users')
+    const res = await axios.get(`${apiBaseUrlRegister}/users`)
     let data = res.data;
     let filterExistingUsers = data.some(user => {
         return user.phoneNumber === inputPhoneNumber.value
@@ -88,7 +91,6 @@ const addUser = async () => {
     const phoneNumber = inputPhoneNumber.value.trim();
     const password = inputPassword.value.trim();
     const confrimPassword = inputConfirmPassword.value.trim();
-
     if (!validationInputs() || !validationPhoneNumber(phoneNumber) || !validationPassword(password, confrimPassword)) {
         return;
     }
@@ -110,7 +112,7 @@ const addUser = async () => {
         try {
             const res = await axios({
                 method: "POST",
-                url: "http://localhost:3000/api/users",
+                url: `${apiBaseUrlRegister}/users`,
                 data: newUsers,
                 headers: {
                     'Content-Type': 'application/json'

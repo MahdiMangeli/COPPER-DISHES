@@ -1,6 +1,9 @@
 const inputPhoneNumber = document.querySelector('#input-phone-number')
 const inputPassword = document.querySelector('#input-password')
 const btnSubmit = document.querySelector('.btn-submit');
+const apiBaseUrlLogin = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : 'https://copperdishes.liara.run/api'
 
 const Toast = Swal.mixin({
     toast: true,
@@ -28,7 +31,7 @@ const validationPhoneNumber = (phoneNumber) => {
 btnSubmit.addEventListener('click', (e) => {
     e.preventDefault();
     axios({
-        url: 'http://localhost:3000/api/users',
+        url: `${apiBaseUrlLogin}/users`,
     }).then(res => {
         return res.data
     }).then(usersArray => {

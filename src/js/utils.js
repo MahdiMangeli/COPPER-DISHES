@@ -5,7 +5,7 @@ const cartAsideContent = document.querySelector('.cart-aside-content');
 const cartClose = document.querySelector('.cart-close');
 const cartIcons = document.querySelectorAll('.cart-icon');
 const darkBlur = document.querySelector('.dark-blur');
-// console.log()
+
 //!Show Menu
 const showMenu = () => {
     navbarMobile.classList.remove('navbar-hidden');

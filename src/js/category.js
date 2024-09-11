@@ -1,3 +1,4 @@
+
 let slideWrapp = document.querySelector(".slide-wrapp");
 let slideWrappBanner = document.querySelector(".slide-wrapp-banner");
 
@@ -6,7 +7,9 @@ const discriptionHistoryTitle = document.querySelector('.discription-history-tit
 const descriptionHistoryProductText = document.querySelector('.description-history-product-text');
 const descriptionProductText = document.querySelector('.description-product-text');
 const productsCategoryTitle = document.querySelector('.products-category-title');
-
+const apiBaseUrlCategory = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : 'https://copperdishes.liara.run/api'
 
 let currentPage = 1;
 let productsPerPage;
@@ -56,7 +59,7 @@ let categoryIDParams = locationSearchParams.get('id');
 
 const getCategory = async () => {
     await axios({
-        url: 'http://localhost:3000/api/categorys'
+        url: `${apiBaseUrlCategory}/categorys`
     }).then(res => res.data)
         .then(data => {
             let findCategoryName = data.find(category => {
@@ -83,7 +86,7 @@ const getCategory = async () => {
 getCategory()
 const getProducts = async () => {
     await axios({
-        url: 'http://localhost:3000/api/products',
+        url: `${apiBaseUrlCategory}/products`,
     })
         .then(res => res.data)
         .then(data => {

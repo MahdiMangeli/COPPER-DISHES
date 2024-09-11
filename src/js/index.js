@@ -1,4 +1,8 @@
 const popularProductWrap = document.querySelector('.popular-product-wrap');
+const apiBaseUrlIndex = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : 'https://copperdishes.liara.run/api'
+
 // ! Swiper Popular Product
 new Swiper('.swiper-popular', {
   slidesPerView: 3,
@@ -43,7 +47,7 @@ new Swiper('.swiper-article', {
 
 const showProducts = async () => {
   await axios({
-    url: 'http://localhost:3000/api/products',
+    url: `${apiBaseUrlIndex}/products`,
   })
     .then(res => res.data)
     .then(data => {

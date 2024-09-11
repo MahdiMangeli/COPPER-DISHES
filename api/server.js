@@ -8,8 +8,11 @@ const ObjectId = mongoose.Types.ObjectId;
 const app = express();
 app.use(express.json());
 app.use(cors())
-
+app.use(cors({
+    origin: 'https://copperdishes.liara.run',
+}));
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://mahdimangeli:Ma13811381***@copperdishes.vuuv7.mongodb.net';
+
 mongoose.connect(MONGO_URI).then(() => {
     console.log("Connection to MongoDB");
 }).catch(err => {

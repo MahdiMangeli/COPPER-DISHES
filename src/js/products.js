@@ -1,5 +1,8 @@
 let slideWrapp = document.querySelector(".slide-wrapp");
 const filterProductsElems = document.querySelectorAll('.filter-products');
+const apiBaseUrlProducts = window.location.hostname === 'localhost'
+  ? 'http://localhost:3000/api'
+  : 'https://copperdishes.liara.run/api'
 
 // ! Swiper Products
 const swiperProducts = new Swiper('.swiper-products', {
@@ -38,7 +41,7 @@ const swiperProducts = new Swiper('.swiper-products', {
   },
 });
 const getProducts = async () => {
-  return await axios({ url: 'http://localhost:3000/api/products' }).then(res => res.data).then(data => data);
+  return await axios({ url: `${apiBaseUrlProducts}/products` }).then(res => res.data).then(data => data);
 }
 
 const displayProductsList = async (allProducts) => {

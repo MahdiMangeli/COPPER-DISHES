@@ -1,14 +1,16 @@
 import './utils.js';
-
 const navbarButtons = document.querySelectorAll('.navbar-btn a');
 const navbarSubmenus = document.querySelectorAll('.navbar-submenu');
 const listOurProducts = document.querySelector('.list-our-products')
+const apiBaseUrlApp = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : 'https://copperdishes.liara.run/api'
 
 listOurProducts.innerHTML = ''
 navbarSubmenus.innerHTML = '';
 const showCategorysInSubMenu = async () => {
     await axios({
-        url: 'http://localhost:3000/api/categorys'
+        url: `${apiBaseUrlApp}/categorys`
     }).then(res => res.data)
         .then(data => {
             navbarSubmenus.forEach(submenu => {

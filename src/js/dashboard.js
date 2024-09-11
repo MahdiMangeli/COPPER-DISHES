@@ -4,17 +4,19 @@ const totalPriceNumber = document.querySelectorAll('.total-price-number');
 const dashboardMain = document.querySelector('.dashboard-main');
 const ordersBtn = document.querySelector('.orders-btn');
 const exitBtn = document.querySelector('.exit-btn');
+const apiBaseUrlDashboard = window.location.hostname === 'localhost'
+  ? 'http://localhost:3000/api'
+  : 'https://copperdishes.liara.run/api'
 
 
 const getCartProduct = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
-  const userId = user._id
-
-  const res = await axios({
-    url: `http://localhost:3000/api/shoppingcarts/${userId}`
-  });
-  let data = res.data;
-  return data;
+  if (user) {
+    const userId = user._id
+    const res = await axios.get(`${apiBaseUrlDashboard}/shoppingcarts/${userId}`);
+    let data = res.data;
+    return data;
+  }
 }
 //!Filter Products By User 
 const filterProductsByUser = async () => {
@@ -68,8 +70,8 @@ const showProductsCart = async () => {
                     <span>تومان</span>
                   </div>
                 </div>`;
-                cartMainContent.insertAdjacentHTML("beforeend", dashboardContent)
-                dashboardMainContent?.insertAdjacentHTML('beforeend', dashboardContent)
+      cartMainContent.insertAdjacentHTML("beforeend", dashboardContent)
+      dashboardMainContent?.insertAdjacentHTML('beforeend', dashboardContent)
     })
 
     totalPriceBasket(products)
@@ -129,7 +131,7 @@ const updateProductCount = async (products, productId, userId, newCount) => {
   })
   if (findProduct) {
     try {
-      await axios.put(`http://localhost:3000/api/shoppingcarts/${productId}/${userId}`, {
+      await axios.put(`${apiBaseUrlDashboard}/shoppingcarts/${productId}/${userId}`, {
         id: productId,
         userId: userId,
         name: findProduct.name,
@@ -158,7 +160,7 @@ const deleteProductFromCart = (productId, userId, productName) => {
     confirmButtonText: 'بله',
   }).then(async result => {
     if (result.isConfirmed) {
-      await axios.delete(`http://localhost:3000/api/shoppingcarts/${productId}/${userId}`, {
+      await axios.delete(`${apiBaseUrlDashboard}/shoppingcarts/${productId}/${userId}`, {
         params: { userId },
       });
       Swal.fire({

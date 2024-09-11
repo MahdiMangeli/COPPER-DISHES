@@ -5,6 +5,9 @@ const aboutProduct = document.querySelector('.about-product');
 const priceText = document.querySelector('.price-text');
 const btnAddCart = document.querySelector('.btn-add-cart')
 const productImageWrap = document.querySelector('.product-image-wrap');
+const apiBaseUrlProduct = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : 'https://copperdishes.liara.run/api'
 
 let locationSearch = location.search;
 const locationSearchParams = new URLSearchParams(locationSearch);
@@ -29,15 +32,15 @@ new Swiper('.swiper-product-images', {
 });
 
 const getCategorys = async () => {
-    return await axios.get('http://localhost:3000/api/categorys').then(res => res.data);
+    return await axios.get(`${apiBaseUrlProduct}/categorys`).then(res => res.data);
 }
 
 const getProducts = async () => {
-    return await axios.get('http://localhost:3000/api/products').then(res => res.data);
+    return await axios.get(`${apiBaseUrlProduct}/products`).then(res => res.data);
 }
 
 const getShoppingCart = async () => {
-    return await axios.get(`http://localhost:3000/api/shoppingcarts/${userId}`).then(res => res.data);
+    return await axios.get(`${apiBaseUrlProduct}/shoppingcarts/${userId}`).then(res => res.data);
 }
 
 const showProduct = async () => {
@@ -105,7 +108,7 @@ const addToCart = async () => {
 
     let products = await getProducts();
     let shoppingCart = await getShoppingCart();
-console.log(shoppingCart)
+    console.log(shoppingCart)
     let product = products.find(product => {
         return product._id === productIDParam;
     });
@@ -130,7 +133,7 @@ console.log(shoppingCart)
         try {
             const res = await axios({
                 method: 'POST',
-                url: 'http://localhost:3000/api/shoppingcarts',
+                url: `${apiBaseUrlProduct}/shoppingcarts`,
                 data: shoppingCartObject,
                 headers: {
                     'Content-Type': 'application/json'
