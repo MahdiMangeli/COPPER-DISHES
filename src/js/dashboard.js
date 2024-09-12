@@ -4,16 +4,18 @@ const totalPriceNumber = document.querySelectorAll('.total-price-number');
 const dashboardMain = document.querySelector('.dashboard-main');
 const ordersBtn = document.querySelector('.orders-btn');
 const exitBtn = document.querySelector('.exit-btn');
+const getUserFromLocalStorageForDashboard = JSON.parse(localStorage.getItem('user'));
+let userIdDashboard;
+
 const apiBaseUrlDashboard = window.location.hostname === 'localhost'
   ? 'http://localhost:3000/api'
   : 'https://naghshnegar.liara.run/api'
 
 
 const getCartProduct = async () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (user) {
-    const userId = user._id
-    const res = await axios.get(`${apiBaseUrlDashboard}/shoppingcarts/${userId}`);
+  if (getUserFromLocalStorageForDashboard) {
+    userIdDashboard = getUserFromLocalStorageForDashboard._id
+    const res = await axios.get(`${apiBaseUrlDashboard}/shoppingcarts/${userIdDashboard}`);
     let data = res.data;
     return data;
   }
@@ -21,19 +23,16 @@ const getCartProduct = async () => {
 //!Filter Products By User 
 const filterProductsByUser = async () => {
   const cartProducts = await getCartProduct();
-  const user = JSON.parse(localStorage.getItem('user'));
   if (dashboardMainContent) {
     dashboardMainContent.innerHTML = '<h2 class="dashboard-title">سبد خرید شما</h2>'
   }
 
-
-  let products = cartProducts.filter(product => {
-    if (user) {
-      return product.userId === user._id;
-    }
-  });
-
-  return products;
+  if (cartProducts) {
+    let products = cartProducts.filter(product => {
+      return product.userId === userIdDashboard
+    });
+    return products;
+  }
 }
 
 //!Show Products

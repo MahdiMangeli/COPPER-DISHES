@@ -12,8 +12,11 @@ const apiBaseUrlProduct = window.location.hostname === 'localhost'
 let locationSearch = location.search;
 const locationSearchParams = new URLSearchParams(locationSearch);
 let productIDParam = locationSearchParams.get('id');
-const user = JSON.parse(localStorage.getItem('user'));
-let userId = user._id
+const getUserFromLocalStorageForProduct = JSON.parse(localStorage.getItem('user'));
+let userIdProduct
+if (getUserFromLocalStorageForProduct) {
+    userIdProduct = getUserFromLocalStorageForProduct._id
+}
 
 const Toast = Swal.mixin({
     toast: true,
@@ -41,7 +44,7 @@ const getProducts = async () => {
 }
 
 const getShoppingCart = async () => {
-    return await axios.get(`${apiBaseUrlProduct}/shoppingcarts/${userId}`).then(res => res.data);
+    return await axios.get(`${apiBaseUrlProduct}/shoppingcarts/${userIdProduct}`).then(res => res.data);
 }
 
 const showProduct = async () => {
@@ -104,7 +107,7 @@ const zoomImage = () => {
 }
 
 const addToCart = async () => {
-
+    const user = JSON.parse(localStorage.getItem('user'));
     let products = await getProducts();
     let shoppingCart = await getShoppingCart();
 
@@ -112,7 +115,7 @@ const addToCart = async () => {
         return product._id === productIDParam;
     });
     let isProductInCart = shoppingCart.some(item => {
-        return product._id === item.productId._id && item.userId === userId
+        return product._id === item.productId._id && item.userId === user._id
     });
     if (isProductInCart) {
         Toast.fire({
@@ -123,7 +126,7 @@ const addToCart = async () => {
     } else {
         const shoppingCartObject = {
             productId: product._id,
-            userId: userId,
+            userId: user._id,
             name: product.name,
             price: product.price,
             image: product.images[0],

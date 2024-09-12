@@ -64,7 +64,7 @@ const getCategory = async () => {
         .then(data => {
             let findCategoryName = data.find(category => {
                 return category._id === categoryIDParams;
-            })
+            });
             if (findCategoryName) {
                 descriptionTitle.innerHTML = findCategoryName.name;
                 productsCategoryTitle.innerHTML = findCategoryName.name;
@@ -77,9 +77,8 @@ const getCategory = async () => {
                             <div class="image-gategory overflow-hidden">
                                 <img src="${image}" class=" w-100">
                             </div>
-                        </div>
-                        `);
-                })
+                        </div>`);
+                });
             }
         });
 }
