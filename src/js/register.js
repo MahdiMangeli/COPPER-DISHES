@@ -126,6 +126,7 @@ const addUser = async () => {
             clearInputs();
             setTimeout(() => {
                 location.href = 'index.html'
+                localStorage.setItem('user', JSON.stringify(user));
             }, 1000);
         } catch (err) {
             Toast.fire({

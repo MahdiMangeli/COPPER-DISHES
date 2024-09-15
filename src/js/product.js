@@ -110,49 +110,60 @@ const addToCart = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
     let products = await getProducts();
     let shoppingCart = await getShoppingCart();
-
-    let product = products.find(product => {
-        return product._id === productIDParam;
-    });
-    let isProductInCart = shoppingCart.some(item => {
-        return product._id === item.productId._id && item.userId === user._id
-    });
-    if (isProductInCart) {
+    if (user) {
+        let product = products.find(product => {
+            return product._id === productIDParam;
+        });
+        let isProductInCart = shoppingCart.some(item => {
+            return product._id === item.productId._id && item.userId === user._id
+        });
+        if (isProductInCart) {
+            Toast.fire({
+                icon: 'warning',
+                text: 'این محصول در سبد خرید شما موجود است',
+                confirmButtonText: 'تایید'
+            })
+        } else {
+            const shoppingCartObject = {
+                productId: product._id,
+                userId: user._id,
+                name: product.name,
+                price: product.price,
+                image: product.images[0],
+                count: 1,
+            }
+            try {
+                const res = await axios({
+                    method: 'POST',
+                    url: `${apiBaseUrlProduct}/shoppingcarts`,
+                    data: shoppingCartObject,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    text: `${res.data.name} به سبد خرید شما اضافه شد.`,
+                    confirmButtonText: 'تایید'
+                })
+            } catch (err) {
+                Toast.fire({
+                    icon: 'error',
+                    text: `محصول به سبد خریداضافه نشد.`,
+                    confirmButtonText: 'تایید'
+                })
+            }
+        }
+    }
+    else {
         Toast.fire({
-            icon: 'warning',
-            text: 'این محصول در سبد خرید شما موجود است',
+            icon: 'خطا',
+            text: 'ابتدا باید در سایت ثبت نام کنید یا وارد شوید!',
             confirmButtonText: 'تایید'
         })
-    } else {
-        const shoppingCartObject = {
-            productId: product._id,
-            userId: user._id,
-            name: product.name,
-            price: product.price,
-            image: product.images[0],
-            count: 1,
-        }
-        try {
-            const res = await axios({
-                method: 'POST',
-                url: `${apiBaseUrlProduct}/shoppingcarts`,
-                data: shoppingCartObject,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            Toast.fire({
-                icon: 'success',
-                text: `${res.data.name} به سبد خرید شما اضافه شد.`,
-                confirmButtonText: 'تایید'
-            })
-        } catch (err) {
-            Toast.fire({
-                icon: 'error',
-                text: `محصول به سبد خریداضافه نشد.`,
-                confirmButtonText: 'تایید'
-            })
-        }
+        setTimeout(() => {
+            location.href = 'login.html'
+        }, 1000)
     }
 }
 btnAddCart.addEventListener('click', addToCart);
