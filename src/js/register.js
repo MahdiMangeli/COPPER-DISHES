@@ -124,9 +124,9 @@ const addUser = async () => {
                 text: "ثبت نام  شما با موفقیت انجام شد"
             });
             clearInputs();
+            localStorage.setItem('user', JSON.stringify(user));
             setTimeout(() => {
                 location.href = 'index.html'
-                localStorage.setItem('user', JSON.stringify(user));
             }, 1000);
         } catch (err) {
             Toast.fire({
