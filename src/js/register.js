@@ -6,8 +6,8 @@ const inputPassword = document.querySelector('#input-password')
 const inputConfirmPassword = document.querySelector('#input-confirm-password')
 const btnSubmit = document.querySelector('.btn-submit');
 const apiBaseUrlRegister = window.location.hostname === 'localhost'
-  ? 'http://localhost:3000/api'
-  : 'https://naghshnegar.liara.run/api'
+    ? 'http://localhost:3000/api'
+    : 'https://naghshnegar.liara.run/api'
 
 const Toast = Swal.mixin({
     toast: true,
@@ -125,9 +125,9 @@ const addUser = async () => {
             });
             clearInputs();
             localStorage.setItem('user', JSON.stringify(user));
-            setTimeout(() => {
+           
                 location.href = 'index.html'
-            }, 1000);
+            
         } catch (err) {
             Toast.fire({
                 icon: 'error',

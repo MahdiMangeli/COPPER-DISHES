@@ -107,9 +107,9 @@ const zoomImage = () => {
 }
 
 const addToCart = async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
     let products = await getProducts();
     let shoppingCart = await getShoppingCart();
+    const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
         let product = products.find(product => {
             return product._id === productIDParam;
