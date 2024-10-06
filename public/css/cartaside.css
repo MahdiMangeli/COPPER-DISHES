@@ -2,7 +2,7 @@
 @import url('dashboard.css');
 
 .cart-aside {
-    z-index: 9999;
+    z-index: 1059;
 }
 
 .dark-blur {

@@ -34,19 +34,19 @@ new Swiper('.swiper-product-images', {
     },
     grabCursor: true,
 });
-
+//! Get Categorys
 const getCategorys = async () => {
     return await axios.get(`${apiBaseUrlProduct}/categorys`).then(res => res.data);
 }
-
+//! Get Products
 const getProducts = async () => {
     return await axios.get(`${apiBaseUrlProduct}/products`).then(res => res.data);
 }
-
+//! Get ShoppingCart
 const getShoppingCart = async () => {
     return await axios.get(`${apiBaseUrlProduct}/shoppingcarts/${userIdProduct}`).then(res => res.data);
 }
-
+//! Get ShoppingCart
 const showProduct = async () => {
     const [categorys, products] = await Promise.all([getCategorys(), getProducts()])
     let product = products.find(product => {
@@ -107,22 +107,36 @@ const zoomImage = () => {
 }
 
 const addToCart = async () => {
-    let products = await getProducts();
-    let shoppingCart = await getShoppingCart();
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-        let product = products.find(product => {
-            return product._id === productIDParam;
+    if (!user) {
+        Toast.fire({
+            icon: 'خطا',
+            text: 'ابتدا باید در سایت ثبت نام کنید یا وارد شوید!',
+            confirmButtonText: 'تایید'
         });
-        let isProductInCart = shoppingCart.some(item => {
-            return product._id === item.productId._id && item.userId === user._id
-        });
+        setTimeout(() => {
+            location.href = 'login.html'
+        }, 1000);
+        return;
+    }
+
+    try {
+        let products = await getProducts();
+        let shoppingCart = await getShoppingCart();
+
+        let product = products.find(product => product._id === productIDParam);
+        if (!product) {
+            return;
+        }
+
+        let isProductInCart = shoppingCart.some(item => product._id === item.productId._id && item.userId === user._id);
+
         if (isProductInCart) {
             Toast.fire({
                 icon: 'warning',
                 text: 'این محصول در سبد خرید شما موجود است',
                 confirmButtonText: 'تایید'
-            })
+            });
         } else {
             const shoppingCartObject = {
                 productId: product._id,
@@ -132,38 +146,29 @@ const addToCart = async () => {
                 image: product.images[0],
                 count: 1,
             }
-            try {
-                const res = await axios({
-                    method: 'POST',
-                    url: `${apiBaseUrlProduct}/shoppingcarts`,
-                    data: shoppingCartObject,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                Toast.fire({
-                    icon: 'success',
-                    text: `${res.data.name} به سبد خرید شما اضافه شد.`,
-                    confirmButtonText: 'تایید'
-                })
-            } catch (err) {
-                Toast.fire({
-                    icon: 'error',
-                    text: `محصول به سبد خریداضافه نشد.`,
-                    confirmButtonText: 'تایید'
-                })
-            }
+            const res = await axios({
+                method: 'POST',
+                url: `${apiBaseUrlProduct}/shoppingcarts`,
+                data: shoppingCartObject,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                text: `${res.data.name} به سبد خرید شما اضافه شد.`,
+                confirmButtonText: 'تایید'
+            })
         }
-    }
-    else {
+
+    } catch (err) {
+        console.error('Error:', err.response); // نمایش خطا
         Toast.fire({
-            icon: 'خطا',
-            text: 'ابتدا باید در سایت ثبت نام کنید یا وارد شوید!',
+            icon: 'error',
+            text: 'محصول به سبد خرید اضافه نشد.',
             confirmButtonText: 'تایید'
-        })
-        setTimeout(() => {
-            location.href = 'login.html'
-        }, 1000)
+        });
+
     }
 }
 btnAddCart.addEventListener('click', addToCart);

@@ -117,21 +117,23 @@ const addUser = async () => {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
-            Toast.fire({
-                icon: 'success',
-                title: 'ثبت نام موفق',
-                text: "ثبت نام  شما با موفقیت انجام شد"
             });
-            clearInputs();
-            localStorage.setItem('user', JSON.stringify(user));
-           
+            if (res.status === 200 || res.status === 201) {
+                Toast.fire({
+                    icon: 'success',
+                    title: 'ثبت نام موفق',
+                    text: "ثبت نام  شما با موفقیت انجام شد"
+                });
+                clearInputs();
+                localStorage.setItem('user', JSON.stringify(res.data));
                 location.href = 'index.html'
-            
+            }
+           
         } catch (err) {
+            console.log(err)
             Toast.fire({
                 icon: 'error',
-                title: 'ثبت نام نا موفق',
+                title: 'ثبت نام ناموفق',
                 text: "ثبت نام نام شما با شکست مواجه شد"
             });
         }

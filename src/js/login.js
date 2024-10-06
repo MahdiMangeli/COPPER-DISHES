@@ -15,8 +15,23 @@ const Toast = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer);
     }
 });
+const validationInputs = () => {
+    const inputs = [inputPhoneNumber, inputPassword];
+    for (const input of inputs) {
+        if (input.value.trim() === '') {
+            Toast.fire({
+                icon: 'error',
+                title: 'خطا',
+                text: 'ورودی ها نمیتواند خالی باشد!'
+            });
+            return false;
+        }
+    }
+    return true;
+}
 
 const validationPhoneNumber = (phoneNumber) => {
+    let phoneNumberRegex = /^(\+98|0)?9\d{9}$/;
     if (!phoneNumberRegex.test(phoneNumber)) {
         Toast.fire({
             icon: 'error',
@@ -30,28 +45,40 @@ const validationPhoneNumber = (phoneNumber) => {
 
 btnSubmit.addEventListener('click', (e) => {
     e.preventDefault();
+
+    if (!validationInputs() || !validationPhoneNumber(inputPhoneNumber.value.trim())) {
+        return;
+    }
+
     axios({
         url: `${apiBaseUrlLogin}/users`,
     }).then(res => {
         return res.data
     }).then(usersArray => {
+        let foundUser = false;
         usersArray.forEach(user => {
-            if (user.phoneNumber === inputPhoneNumber.value && user.password === inputPassword.value) {
-                location.href = 'index.html';
+            console.log(typeof user.phoneNumber)
+            console.log(typeof user.password)
+            if (user.phoneNumber == inputPhoneNumber.value.trim() && user.password == inputPassword.value.trim()) {
                 localStorage.setItem('user', JSON.stringify(user));
-            }
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    toast: true,
-                    position: 'top-end',
-                    timer: 2000,
-                    timerProgressBar: true,
-                    title: 'خطا',
-                    text: 'شماره تماس یا رمز عبور نا معتبر هست!'
-                });
+                foundUser = true;
             }
         });
+        if (!foundUser) {
+            Swal.fire({
+                icon: 'error',
+                toast: true,
+                position: 'top-end',
+                timer: 2000,
+                timerProgressBar: true,
+                title: 'خطا',
+                text: 'شماره تماس یا رمز عبور اشتباه است!'
+            });
+        }
+        else {
+             location.href = 'index.html';
+        }
+
     }).catch(err => {
         Swal.fire({
             icon: 'error',
